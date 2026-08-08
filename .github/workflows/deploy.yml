@@ -1,1 +1,58 @@
+name: Deploy GitHub Pages
 
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Validate nexus dataset
+        run: node scripts/validate-data.mjs
+
+      - name: Reconcile audited benchmark fields
+        run: node scripts/audit-data.mjs
+
+      - name: Syntax-check application JavaScript
+        run: node --check assets/app.js
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build static site artifact
+        run: |
+          mkdir _site
+          cp index.html guide.html _site/
+          cp -R assets data updates _site/
+          touch _site/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+          include-hidden-files: true
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
