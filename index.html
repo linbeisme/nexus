@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CPA research app for state remote-seller sales tax economic nexus collection and remittance requirements.">
+  <title>State Sales Tax Nexus Requirements</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="page-header">
+    <div>
+      <div class="eyebrow">CPA RESEARCH WORKPAPER</div>
+      <h1>State Seller Sales Tax Collection &amp; Remittance Requirements</h1>
+      <p class="subtitle">Economic-nexus reference for remote sellers. “Withholding” is treated as the seller’s duty to <strong>collect and remit sales/use tax</strong>, not payroll or income-tax withholding.</p>
+    </div>
+    <div id="datasetStamp" class="stamp">Loading dataset…</div>
+  </header>
+
+  <section class="notice"><strong>Professional-use note:</strong> This application is a research aid, not legal advice. Physical presence, affiliate/click-through nexus, product taxability, marketplace-facilitator rules, home-rule jurisdictions, trailing nexus, and special taxes may create obligations outside the economic-nexus rule summarized here. Confirm material positions against current primary authority.</section>
+
+  <section class="status-grid" aria-label="Dataset review status">
+    <article><span>Last full review</span><strong id="lastFullReview">—</strong></article>
+    <article><span>Next scheduled review</span><strong id="nextReview">—</strong></article>
+    <article><span>Review due</span><strong id="reviewDueCount">—</strong></article>
+    <article><span>Approved changes (local)</span><strong id="approvedChangeCount">0</strong></article>
+    <article><span>Pending proposals</span><strong id="proposalCount">0</strong></article>
+  </section>
+
+  <section class="toolbar panel">
+    <div class="toolbar-row">
+      <input id="globalSearch" class="grow" type="search" placeholder="Search all columns…" aria-label="Search all columns">
+      <label class="toggle-control" title="Show only jurisdictions whose economic-nexus test has a dollar-sales threshold and no transaction-count prong.">
+        <input id="dollarThresholdOnly" type="checkbox">
+        <span>Sales $ threshold only</span>
+      </label>
+      <button id="clearFilters">Clear filters</button>
+      <button id="markReviewed">Mark visible reviewed today</button>
+      <button id="exportExcel" class="primary">Export filtered table to Excel</button>
+      <button id="exportAllExcel">Export all states to Excel</button>
+      <button id="downloadDataset">Download updated JSON</button>
+      <button id="resetWorkingCopy" class="danger">Reset working copy</button>
+      <a class="button-link" href="./guide.html">Beginner setup &amp; update guide</a>
+    </div>
+    <div id="stats" class="stats"></div>
+    <div class="scope-legend" role="note">
+      <strong>Nexus threshold sales scope:</strong> “All / gross sales” generally includes resale and exempt/nontaxable sales within the state-defined sales base; “Retail sales only” excludes resale; “Taxable sales only” excludes nontaxable sales. Some states limit gross sales to specified property or receipts, as stated in the detailed sales-basis column.
+    </div>
+  </section>
+
+  <section class="table-card">
+    <div class="table-wrap">
+      <table id="nexusTable">
+        <thead>
+          <tr id="headerRow"></tr>
+          <tr id="filterRow" class="filter-row"></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel update-panel">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">CONTROLLED UPDATE WORKFLOW</div>
+        <h2>Research, stage, review, then publish</h2>
+      </div>
+      <span class="badge neutral">Browser changes are not published until committed to GitHub</span>
+    </div>
+
+    <div class="update-grid">
+      <label for="updateScope">Research scope</label>
+      <select id="updateScope">
+        <option value="visible">Visible / filtered rows</option>
+        <option value="all">All jurisdictions</option>
+      </select>
+
+      <label for="updatePrompt">Prepared research prompt</label>
+      <div>
+        <div class="toolbar-row compact">
+          <button id="buildPrompt">Build prompt</button>
+          <button id="copyPrompt">Copy prompt</button>
+          <button id="openSearch">Open official-source searches</button>
+        </div>
+        <textarea id="updatePrompt" placeholder="Build a source-first update prompt for the selected states."></textarea>
+      </div>
+
+      <label for="jsonPatch">Stage proposed changes</label>
+      <div>
+        <textarea id="jsonPatch" placeholder='Paste a JSON array returned by your research process, e.g. [{"state":"Illinois","threshold":"$100,000","source_url":"https://..."}]'></textarea>
+        <div class="toolbar-row compact">
+          <button id="stagePatch" class="primary">Stage JSON changes</button>
+          <button id="clearProposals">Clear proposals</button>
+          <span id="patchStatus" class="small"></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="proposalArea" class="proposal-area hidden">
+      <div class="section-heading subheading">
+        <h3>Proposed changes requiring review</h3>
+        <div class="toolbar-row compact">
+          <button id="approveAll" class="primary">Approve all proposals</button>
+          <button id="downloadHistory">Download update history</button>
+        </div>
+      </div>
+      <div class="proposal-list" id="proposalList"></div>
+    </div>
+
+    <details>
+      <summary>GitHub publishing workflow</summary>
+      <ol class="publish-steps">
+        <li>Research and stage changes here.</li>
+        <li>Review each diff and its official source.</li>
+        <li>Approve accepted changes, then download <code>state-nexus.json</code> and <code>update-history.json</code>.</li>
+        <li>Replace the corresponding files in the repository and commit through a pull request or direct reviewed commit.</li>
+        <li>GitHub Pages deploys the committed version. Local browser edits alone never modify the repository.</li>
+      </ol>
+    </details>
+  </section>
+
+  <footer>
+    <p id="footerMeta"></p>
+    <p>Source URLs in the table should point to primary state authority wherever available. Review dates are working-paper metadata and do not necessarily represent a state agency webpage publication date.</p>
+  </footer>
+</main>
+
+<dialog id="editDialog">
+  <form method="dialog" class="modal" id="editForm">
+    <h2>Edit working-copy record</h2>
+    <div class="form-grid" id="editFields"></div>
+    <div class="modal-actions"><button value="cancel">Cancel</button><button id="saveEdit" value="default" class="primary">Save to working copy</button></div>
+  </form>
+</dialog>
+
+<script src="./assets/app.js" defer></script>
+</body>
+</html>

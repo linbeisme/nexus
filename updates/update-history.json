@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "date": "2026-08-07",
+      "type": "baseline_review",
+      "jurisdictions": 51,
+      "summary": "Initial GitHub-ready baseline migrated from the CPA remote-seller nexus application. State records include primary-source URLs and working-paper review dates.",
+      "reviewed_by": "CPA / repository maintainer",
+      "source": "data/state-nexus.json"
+    },
+    {
+      "date": "2026-08-07",
+      "type": "schema_and_audit_update",
+      "jurisdictions": 51,
+      "summary": "Added sales-dollar-only toggle support and nexus_sales_scope classification; audited scope/threshold/transaction-prong completeness; clarified Alaska marketplace-threshold treatment; verified XLSX export and UI wiring; added deployment quality gates.",
+      "reviewed_by": "Independent research/QA pass; repository maintainer approval required",
+      "source": "AUDIT_REPORT.md"
+    }
+  ]
+}
