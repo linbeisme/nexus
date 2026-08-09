@@ -51,7 +51,7 @@
   </section>
 
   <section class="toolbar panel">
-    <div class="toolbar-row">
+    <div class="toolbar-row toolbar-actions">
       <input id="globalSearch" class="grow" type="search" placeholder="Search all columns…" aria-label="Search all columns">
       <label class="toggle-control" title="Show only jurisdictions whose economic-nexus test has a dollar-sales threshold and no transaction-count prong.">
         <input id="dollarThresholdOnly" type="checkbox">
@@ -63,7 +63,9 @@
       <button id="exportAllExcel" class="excel">Export all states to Excel</button>
       <button id="downloadDataset">Download updated JSON</button>
       <button id="resetWorkingCopy" class="danger">Reset working copy</button>
-      <a class="button-link" href="./guide.html">Beginner setup &amp; update guide</a>
+    </div>
+    <div class="toolbar-row toolbar-status">
+      <a class="button-link guide-link" href="./guide.html">Beginner setup &amp; update guide</a>
       <div id="stats" class="stats inline-stats" aria-live="polite"></div>
     </div>
     <div class="scope-legend" role="note">
@@ -120,6 +122,7 @@
         <div class="toolbar-row compact">
           <button id="buildPrompt">Build prompt</button>
           <button id="copyPrompt">Copy prompt</button>
+          <button id="clearPrompt">Clear prompt</button>
           <button id="openSearch">Open official-source searches</button>
         </div>
         <textarea id="updatePrompt" placeholder="Build a source-first update prompt for the selected states."></textarea>

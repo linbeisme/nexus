@@ -47,7 +47,7 @@ required_ids = {
     "tableScrollTop", "tableScrollTopSpacer", "tableWrap", "statePicker",
     "statePickerControls", "statePickerToggle", "selectedStateSummary",
     "statePickerSearch", "stateSelectionCount", "clearStateSelection", "stateSelectionList",
-    "versionBaselineLine", "auditLine", "sourceAuditLine"
+    "versionBaselineLine", "auditLine", "sourceAuditLine", "clearPrompt"
 }
 ids = [tag.get("id") for tag in soup.find_all(attrs={"id": True})]
 for rid in sorted(required_ids):
@@ -101,7 +101,10 @@ check("Excel buttons use dedicated dark-green class", all("excel" in (soup.find(
 check("Input fields use light-yellow background variable", "--input-bg:#fff7c9" in compact_css and "background:var(--input-bg)" in compact_css)
 check("Default action buttons use light-purple background variable", "--button-bg:#eee5ff" in compact_css and "background:var(--button-bg)" in compact_css)
 check("Table has a synchronized top scrollbar", soup.find(id="tableScrollTop") is not None and "setupTableScrollSync" in js and "syncTableScrollWidth" in js)
-check("Result chips are inline with the guide control", bool(soup.select_one(".toolbar-row #stats.inline-stats")))
+check("Guide and result chips share the dedicated status row", bool(soup.select_one(".toolbar-status .guide-link") and soup.select_one(".toolbar-status #stats.inline-stats")))
+check("Guide control uses navy styling", ".guide-link{background:#0b2d5c" in compact_css and "color:#fff" in compact_css)
+check("Clear prompt control is wired", soup.find(id="clearPrompt") is not None and "getElementById('clearPrompt')" in js)
+check("Multi-filter options force left-checkbox/right-label alignment", ".multi-option{display:flex!important" in compact_css and "order:0" in compact_css and "order:1" in compact_css)
 check("Material-change siren and state-star logic exists", "changeAlert" in js and "state-change-star" in js and "MATERIAL_CHANGE_KEYS" in js)
 check("Research scope supports selected states", bool(soup.select_one('#updateScope option[value="selected"]')) and "selectedResearchStates" in js)
 check("Research state selection is capped at 10", "selectedResearchStates.size>=10" in js)

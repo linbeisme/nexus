@@ -46,3 +46,11 @@ The GitHub Pages app is static and does not continuously crawl state websites by
 - Reworked multi-select filter popovers to prevent clipping, narrow text wrapping, and overlapping open menus.
 - Split header publication metadata into three compact lines.
 - Added a collapsible state selector for the up-to-10-state research workflow; it is collapsed by default to save vertical space.
+## UI alignment patch
+
+- Rebuilt multi-select filter option rows so each checkbox is fixed on the left and each criterion label is aligned to its right without clipping.
+- Increased and column-tuned the filter popover width, including extra room for long transaction-test criteria.
+- Added a **Clear prompt** action in the controlled research workflow.
+- Moved the guide + result-status chips to their own row immediately below the primary toolbar actions.
+- Changed the **Beginner setup & update guide** control to a navy-blue badge/button with white text.
+

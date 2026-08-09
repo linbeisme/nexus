@@ -148,11 +148,13 @@ function multiSummary(key){const n=(filters[key]||[]).length; return n?`${n} sel
 function positionMultiFilterMenu(details,menu){
   const summary=details.querySelector('summary'); if(!summary) return;
   const r=summary.getBoundingClientRect();
-  const width=Math.min(360,Math.max(260,window.innerWidth-24));
+  const key=details.dataset.key || '';
+  const preferred = key==='transaction_test' ? 430 : (key==='state' ? 330 : 390);
+  const width=Math.min(preferred,Math.max(280,window.innerWidth-24));
   let left=Math.max(12,r.left);
   if(left+width>window.innerWidth-12) left=Math.max(12,window.innerWidth-width-12);
   let top=r.bottom+5;
-  const estimated=Math.min(380,window.innerHeight-24);
+  const estimated=Math.min(420,window.innerHeight-24);
   if(top+estimated>window.innerHeight-12 && r.top>estimated+12) top=Math.max(12,r.top-estimated-5);
   menu.style.width=`${width}px`; menu.style.left=`${left}px`; menu.style.top=`${Math.max(12,top)}px`;
 }
@@ -420,6 +422,7 @@ function bindEvents(){
   document.getElementById('clearStateSelection').addEventListener('click',()=>{selectedResearchStates.clear();persistResearchStates();renderStatePicker();});
   document.getElementById('buildPrompt').addEventListener('click',buildUpdatePrompt);
   document.getElementById('copyPrompt').addEventListener('click',async()=>{if(!document.getElementById('updatePrompt').value)buildUpdatePrompt();try{await navigator.clipboard.writeText(document.getElementById('updatePrompt').value);}catch{document.getElementById('updatePrompt').select();document.execCommand('copy');}});
+  document.getElementById('clearPrompt').addEventListener('click',()=>{const prompt=document.getElementById('updatePrompt');prompt.value='';prompt.focus();});
   document.getElementById('openSearch').addEventListener('click',openSearches);
   document.getElementById('stagePatch').addEventListener('click',stagePatch);
   document.getElementById('clearProposals').addEventListener('click',()=>{if(confirm('Clear all staged proposals?')){proposals=[];persistProposals();buildHeader();renderProposals();render();}});
