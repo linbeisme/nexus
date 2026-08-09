@@ -16,6 +16,14 @@
       "summary": "Added sales-dollar-only toggle support and nexus_sales_scope classification; audited scope/threshold/transaction-prong completeness; clarified Alaska marketplace-threshold treatment; verified XLSX export and UI wiring; added deployment quality gates.",
       "reviewed_by": "Independent research/QA pass; repository maintainer approval required",
       "source": "AUDIT_REPORT.md"
+    },
+    {
+      "date": "2026-08-08",
+      "type": "v1.1_release",
+      "jurisdictions": 51,
+      "summary": "Version 1.1 UX release: Day/Night theme, money-bag favicon, dark-green Excel actions, light-yellow inputs, light-purple secondary actions, synchronized top/bottom table scrollbars, inline results indicators, multi-criteria filters for five columns, up-to-10-state research batches, material-change siren/red-star alerts, and 51-jurisdiction source-URL refresh/validation.",
+      "reviewed_by": "Independent UI/source-link QA; repository maintainer approval required",
+      "source": "SOURCE_URL_AUDIT.md"
     }
   ]
 }

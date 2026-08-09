@@ -1,4 +1,4 @@
-# Beginner GitHub Setup & Tax-Data Update Guide
+# Beginner GitHub Setup & Tax-Data Update Guide — v1.1
 
 The illustrated, click-by-click manual is available as **`guide.html`** and is published with the GitHub Pages site.
 
@@ -23,3 +23,12 @@ The full manual includes current-law training examples for Illinois and Kentucky
 - GitHub Pages publishing source: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 - Automatic Pages deployment: https://docs.github.com/en/get-started/start-your-journey/deploying-your-website-automatically
 - GitHub Desktop getting started: https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop
+
+
+## Version 1.1 update controls
+
+- Use **Selected states (up to 10)** for controlled research batches.
+- Multi-select filters are available for State/Jurisdiction, Review status, Tax regime, Transaction test, and Nexus threshold sales scope.
+- Research JSON may include `change_detected` and `change_note`. A material requirement change triggers the flashing siren and a red star beside the affected state until the proposal is resolved.
+- The top and bottom horizontal scrollbars stay synchronized for wide-table review.
+- Source URLs were revalidated on 2026-08-08; see `SOURCE_URL_AUDIT.md`.

@@ -1,20 +1,22 @@
-# State Sales Tax Nexus Requirements App
+# State Sales Tax Nexus Requirements App — v1.1
 
 Static GitHub Pages application for CPA research on remote-seller sales/use tax economic-nexus collection and remittance requirements for all 50 states plus the District of Columbia.
 
 ## What the app does
 
 - Displays 51 jurisdictions in a filterable table.
-- Provides a keyword filter for every substantive column plus a global search.
+- Provides a global search, keyword filters, and multi-select filters for State/Jurisdiction, Review status, Tax regime, Transaction test, and Nexus threshold sales scope.
 - Includes a **Sales $ threshold only** toggle that shows jurisdictions with a dollar-sales threshold and no transaction-count prong.
 - Shows economic-nexus thresholds, transaction tests, measurement periods, a separate **nexus threshold sales scope** classification (gross/all, retail-only, taxable-only, or no statewide sales tax), detailed sales included, collection/registration timing, marketplace notes, rule-effective dates, latest material-change dates, review dates, notes, and primary-source URLs.
 - Computes a working-paper status of **Current**, **Review due**, or **Proposed change**.
-- Builds source-first research prompts for selected jurisdictions.
+- Builds source-first research prompts for up to **10 specifically selected states** at a time, the visible filtered rows, or all jurisdictions.
 - Opens state-specific official-domain web searches for change research.
 - Stages JSON research results as reviewable field-level diffs instead of silently overwriting the published dataset.
 - Records approved changes in local update history.
 - Exports either the filtered table or all 51 jurisdictions to a true `.xlsx` workbook in the browser. The export includes the nexus sales-scope field and cited source information.
 - Downloads replacement `data/state-nexus.json` and `updates/update-history.json` files for a reviewed GitHub commit.
+- Includes a professional Day/Night theme, dual top/bottom horizontal table scrolling, a bookmark/favicon money-bag icon, and a material-change alert siren/red state star when research identifies an unhandled substantive change.
+- Source-link audit metadata records the most recent 51-jurisdiction official-source URL validation; see `SOURCE_URL_AUDIT.md`.
 
 ## Repository layout
 
@@ -84,7 +86,7 @@ The browser smoke test is supplemental. The static audit verifies control presen
 
 ## Review and update process
 
-1. Filter to the state(s) being reviewed or choose all jurisdictions.
+1. Choose **Selected states (up to 10)**, the visible filtered rows, or all jurisdictions.
 2. Click **Build prompt** and use the prompt in your approved research tool/workflow.
 3. Prefer primary authority: enacted legislation, statutes, regulations, state tax-agency notices, FAQs, and official pages.
 4. Paste the returned JSON array into **Stage proposed changes**.
@@ -146,3 +148,8 @@ See `AUDIT_REPORT.md` for the latest data-reconciliation methodology, correction
 ## Beginner illustrated guide
 
 A click-by-click GitHub Pages setup and controlled tax-data update manual is included at [`guide.html`](./guide.html), with app screenshots, workflow diagrams, charts, troubleshooting, and worked Illinois/Kentucky update examples. The live Pages site publishes the same guide alongside the app.
+
+
+## Version 1.1 persistence note
+
+Version 1.1 uses **dataset schema v4** and new local-browser storage keys so a previously saved v1.0 working copy cannot mask the refreshed v1.1 source links or metadata after deployment.

@@ -20,12 +20,13 @@ main{padding:0 48px 60px}.callout{border-left:5px solid var(--accent);padding:14
 </head>
 <body><div class="wrap">
 <header class="hero">
-  <div class="eyebrow">BEGINNER IMPLEMENTATION MANUAL</div>
+  <div class="eyebrow">BEGINNER IMPLEMENTATION MANUAL · APP v1.1</div>
   <h1>GitHub Setup & Tax-Data Update Guide</h1>
   <p class="lede">A click-by-click guide for publishing the State Seller Sales Tax Collection & Remittance Requirements app on GitHub Pages, maintaining the 51-jurisdiction dataset, reviewing proposed tax changes, and publishing only approved updates.</p>
   <div class="nav"><a class="btn primary" href="./index.html">Open the nexus app</a><a class="btn" href="#setup">GitHub setup</a><a class="btn" href="#update">Update workflow</a><a class="btn" href="#examples">Worked examples</a><a class="btn" href="#troubleshooting">Troubleshooting</a></div>
 </header>
 <main>
+<div class="callout good"><strong>Version 1.1:</strong> adds Day/Night mode, multi-select column filters, up-to-10-state research batches, dual top/bottom table scrollbars, source-link audit metadata, and a flashing material-change alert with a red star beside affected jurisdictions.</div>
 <section>
 <h2>1. What you are publishing</h2>
 <p>This project is a static web application. The browser reads <code>data/state-nexus.json</code>, renders the table, and lets you research, stage, review, and export changes. GitHub Pages hosts the public website; GitHub Actions validates and deploys it.</p>
@@ -110,7 +111,7 @@ main{padding:0 48px 60px}.callout{border-left:5px solid var(--accent);padding:14
 <div class="step"><div class="num">5</div><div><h3>Require JSON-only output</h3><p>The app expects a JSON array. Each state object may use these keys:</p><div class="codebox">state, status, threshold, transaction_test, measurement_period,
 nexus_sales_scope, sales_basis, collection_timing, marketplace_note,
 rule_effective_date, latest_change_date, last_reviewed,
-source_title, source_url, notes</div><p>Dates should use <code>YYYY-MM-DD</code>. The state name must match the table exactly.</p></div></div>
+source_title, source_url, notes, change_detected, change_note</div><p>Dates should use <code>YYYY-MM-DD</code>. The state name must match the table exactly.</p></div></div>
 <div class="step"><div class="num">6</div><div><h3>Paste and stage—do not approve yet</h3><p>Paste the JSON array into <strong>Stage proposed changes</strong> and click <strong>Stage JSON changes</strong>. The app compares the proposed values to the working record and creates a diff card for each changed state.</p></div></div>
 <div class="step"><div class="num">7</div><div><h3>Perform the CPA review</h3><p>For each proposal, review every changed field and click <strong>Open cited source</strong>. Check at least:</p><ul class="check"><li>Was the law actually enacted, not merely introduced?</li><li>Is the effective date correct?</li><li>Does the threshold use <code>&gt;</code> or <code>≥</code> / “at least” language?</li><li>Does the state count gross, retail, taxable, or another defined sales base?</li><li>Are marketplace-facilitated sales included or excluded in the seller's threshold?</li><li>Does collection begin immediately, prospectively, next month, or after a specified number of days?</li><li>Is the cited source current and official?</li></ul><div class="callout warn"><strong>Do not approve a proposal just because the source URL looks official.</strong> Open it and read the relevant rule.</div></div></div>
 <div class="step"><div class="num">8</div><div><h3>Approve or reject</h3><p>Click <strong>Approve</strong> only after the source supports the proposed field changes. Use <strong>Reject</strong> when the source is inadequate or the wording overstates the law. Approval updates only your browser working copy.</p></div></div>
@@ -141,7 +142,9 @@ source_title, source_url, notes</div><p>Dates should use <code>YYYY-MM-DD</code>
     "last_reviewed": "2026-08-08",
     "source_title": "Illinois DOR – FY 2026-12",
     "source_url": "https://tax.illinois.gov/research/publications/bulletins/fy-2026-12.html",
-    "notes": "The 200-transaction test was eliminated effective 2026-01-01."
+    "notes": "The 200-transaction test was eliminated effective 2026-01-01.",
+    "change_detected": true,
+    "change_note": "Illinois removed the 200-transaction test effective 2026-01-01."
   }
 ]</div>
 
@@ -164,7 +167,9 @@ source_title, source_url, notes</div><p>Dates should use <code>YYYY-MM-DD</code>
     "last_reviewed": "2026-08-08",
     "source_title": "Kentucky LRC – KRS 139.340",
     "source_url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=58190",
-    "notes": "Effective 2026-08-01, Kentucky uses a sales-volume threshold only; the separate transaction-count nexus prong was deleted."
+    "notes": "Effective 2026-08-01, Kentucky uses a sales-volume threshold only; the separate transaction-count nexus prong was deleted.",
+    "change_detected": true,
+    "change_note": "Kentucky removed the separate transaction-count nexus prong effective 2026-08-01."
   }
 ]</div>
 <div class="callout good"><strong>Why this is a useful training example:</strong> not every update changes the dollar threshold. A current-law review can improve the collection-start rule, sales-base wording, citation, and last-reviewed date while leaving the threshold amount unchanged.</div>

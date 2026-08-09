@@ -1,21 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="day">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="CPA research app for state remote-seller sales tax economic nexus collection and remittance requirements.">
+  <meta name="theme-color" id="themeColor" content="#f5f7fb">
   <title>State Sales Tax Nexus Requirements</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('salesTaxNexusThemeV1');
+        document.documentElement.dataset.theme = saved === 'night' ? 'night' : 'day';
+      } catch {}
+    })();
+  </script>
   <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
 <main class="wrap">
   <header class="page-header">
     <div>
-      <div class="eyebrow">CPA RESEARCH WORKPAPER</div>
+      <div class="eyebrow">CPA RESEARCH WORKPAPER <span class="version-badge">v1.1</span></div>
       <h1>State Seller Sales Tax Collection &amp; Remittance Requirements</h1>
       <p class="subtitle">Economic-nexus reference for remote sellers. “Withholding” is treated as the seller’s duty to <strong>collect and remit sales/use tax</strong>, not payroll or income-tax withholding.</p>
     </div>
-    <div id="datasetStamp" class="stamp">Loading dataset…</div>
+    <div class="header-tools">
+      <div class="stamp-line">
+        <div id="datasetStamp" class="stamp">Loading dataset…</div>
+        <div id="changeAlert" class="change-alert hidden" role="status" aria-live="polite" title="Material change alert">🚨 <span>Change detected</span></div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" title="Switch between day and night themes">
+        <span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Night</span>
+      </button>
+    </div>
   </header>
 
   <section class="notice"><strong>Professional-use note:</strong> This application is a research aid, not legal advice. Physical presence, affiliate/click-through nexus, product taxability, marketplace-facilitator rules, home-rule jurisdictions, trailing nexus, and special taxes may create obligations outside the economic-nexus rule summarized here. Confirm material positions against current primary authority.</section>
@@ -37,20 +55,21 @@
       </label>
       <button id="clearFilters">Clear filters</button>
       <button id="markReviewed">Mark visible reviewed today</button>
-      <button id="exportExcel" class="primary">Export filtered table to Excel</button>
-      <button id="exportAllExcel">Export all states to Excel</button>
+      <button id="exportExcel" class="excel">Export filtered table to Excel</button>
+      <button id="exportAllExcel" class="excel">Export all states to Excel</button>
       <button id="downloadDataset">Download updated JSON</button>
       <button id="resetWorkingCopy" class="danger">Reset working copy</button>
       <a class="button-link" href="./guide.html">Beginner setup &amp; update guide</a>
+      <div id="stats" class="stats inline-stats" aria-live="polite"></div>
     </div>
-    <div id="stats" class="stats"></div>
     <div class="scope-legend" role="note">
       <strong>Nexus threshold sales scope:</strong> “All / gross sales” generally includes resale and exempt/nontaxable sales within the state-defined sales base; “Retail sales only” excludes resale; “Taxable sales only” excludes nontaxable sales. Some states limit gross sales to specified property or receipts, as stated in the detailed sales-basis column.
     </div>
   </section>
 
-  <section class="table-card">
-    <div class="table-wrap">
+  <section class="table-card" aria-label="State nexus requirements table">
+    <div id="tableScrollTop" class="table-scroll-top" aria-label="Horizontal scroll for the state table" tabindex="0"><div id="tableScrollTopSpacer"></div></div>
+    <div class="table-wrap" id="tableWrap">
       <table id="nexusTable">
         <thead>
           <tr id="headerRow"></tr>
@@ -72,10 +91,21 @@
 
     <div class="update-grid">
       <label for="updateScope">Research scope</label>
-      <select id="updateScope">
-        <option value="visible">Visible / filtered rows</option>
-        <option value="all">All jurisdictions</option>
-      </select>
+      <div>
+        <select id="updateScope">
+          <option value="selected">Selected states (up to 10)</option>
+          <option value="visible">Visible / filtered rows</option>
+          <option value="all">All jurisdictions</option>
+        </select>
+        <div id="statePicker" class="state-picker">
+          <div class="state-picker-head">
+            <input id="statePickerSearch" type="search" placeholder="Find a state…" aria-label="Find a state for research selection">
+            <span id="stateSelectionCount" class="badge neutral">0 / 10 selected</span>
+            <button id="clearStateSelection" type="button">Clear selected</button>
+          </div>
+          <div id="stateSelectionList" class="state-selection-list" aria-label="Select up to 10 states"></div>
+        </div>
+      </div>
 
       <label for="updatePrompt">Prepared research prompt</label>
       <div>
@@ -89,7 +119,7 @@
 
       <label for="jsonPatch">Stage proposed changes</label>
       <div>
-        <textarea id="jsonPatch" placeholder='Paste a JSON array returned by your research process, e.g. [{"state":"Illinois","threshold":"$100,000","source_url":"https://..."}]'></textarea>
+        <textarea id="jsonPatch" placeholder='Paste a JSON array returned by your research process, e.g. [{"state":"Illinois","threshold":"$100,000","change_detected":true,"change_note":"Transaction test repealed","source_url":"https://..."}]'></textarea>
         <div class="toolbar-row compact">
           <button id="stagePatch" class="primary">Stage JSON changes</button>
           <button id="clearProposals">Clear proposals</button>
@@ -113,7 +143,7 @@
       <summary>GitHub publishing workflow</summary>
       <ol class="publish-steps">
         <li>Research and stage changes here.</li>
-        <li>Review each diff and its official source.</li>
+        <li>Review each diff and its official source. A flashing siren/red star means a material requirement change has been detected or staged and still needs attention.</li>
         <li>Approve accepted changes, then download <code>state-nexus.json</code> and <code>update-history.json</code>.</li>
         <li>Replace the corresponding files in the repository and commit through a pull request or direct reviewed commit.</li>
         <li>GitHub Pages deploys the committed version. Local browser edits alone never modify the repository.</li>

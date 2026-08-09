@@ -43,7 +43,9 @@ required_ids = {
     "updateScope", "updatePrompt", "buildPrompt", "copyPrompt", "openSearch",
     "jsonPatch", "stagePatch", "clearProposals", "patchStatus", "proposalArea",
     "proposalList", "approveAll", "downloadHistory", "footerMeta", "editDialog",
-    "editForm", "editFields", "saveEdit"
+    "editForm", "editFields", "saveEdit", "themeToggle", "changeAlert",
+    "tableScrollTop", "tableScrollTopSpacer", "tableWrap", "statePicker",
+    "statePickerSearch", "stateSelectionCount", "clearStateSelection", "stateSelectionList"
 }
 ids = [tag.get("id") for tag in soup.find_all(attrs={"id": True})]
 for rid in sorted(required_ids):
@@ -85,7 +87,25 @@ check("Keyboard focus treatment is present", ":focus-visible" in css)
 check("Toolbar wraps instead of clipping", ".toolbar-row{display:flex" in compact_css and "flex-wrap:wrap" in compact_css)
 check("Tablet responsive breakpoint exists", "@media (max-width:1000px)" in css)
 check("Phone responsive breakpoint exists", "@media (max-width:620px)" in css)
-check("Phone toolbar controls expand full width", ".toolbar-row>*{width:100%}" in compact_css)
+check("Phone toolbar controls expand full width", ".toolbar-row>*:not(.stats){width:100%}" in compact_css)
+
+
+# Version 1.1 UX requirements.
+check("Version 1.1 is visible", "v1.1" in soup.get_text(" ", strip=True))
+check("Money bag favicon is configured", bool(soup.find("link", attrs={"rel": "icon", "href": "./assets/favicon.svg"})))
+check("Day/night theme toggle exists", soup.find(id="themeToggle") is not None and "toggleTheme" in js)
+check("Night theme CSS exists", 'html[data-theme="night"]' in css)
+check("Excel buttons use dedicated dark-green class", all("excel" in (soup.find(id=x).get("class") or []) for x in ["exportExcel","exportAllExcel"]))
+check("Input fields use light-yellow background variable", "--input-bg:#fff7c9" in compact_css and "background:var(--input-bg)" in compact_css)
+check("Default action buttons use light-purple background variable", "--button-bg:#eee5ff" in compact_css and "background:var(--button-bg)" in compact_css)
+check("Table has a synchronized top scrollbar", soup.find(id="tableScrollTop") is not None and "setupTableScrollSync" in js and "syncTableScrollWidth" in js)
+check("Result chips are inline with the guide control", bool(soup.select_one(".toolbar-row #stats.inline-stats")))
+check("Material-change siren and state-star logic exists", "changeAlert" in js and "state-change-star" in js and "MATERIAL_CHANGE_KEYS" in js)
+check("Research scope supports selected states", bool(soup.select_one('#updateScope option[value="selected"]')) and "selectedResearchStates" in js)
+check("Research state selection is capped at 10", "selectedResearchStates.size>=10" in js)
+for key in ["state","review_status","status","transaction_test","nexus_sales_scope"]:
+    check(f"Multi-criteria filter enabled for {key}", key in re.search(r"MULTI_FILTER_KEYS = new Set\(\[(.*?)\]\)", js, re.S).group(1))
+check("Source URL audit metadata is present", dataset.get("source_url_audit_date") == "2026-08-08" and dataset.get("source_url_audit_count") == 51)
 
 # Dataset assumptions that drive the UI.
 check("Exactly 51 jurisdictions", len(states) == 51, f"count={len(states)}")

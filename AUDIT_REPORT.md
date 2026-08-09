@@ -1,9 +1,10 @@
 # Independent Audit & UI Review
 
-**Audit date:** 2026-08-07  
+**Data audit date:** 2026-08-07  
+**Version 1.1 UI/source-link QA date:** 2026-08-08  
 **Independent cross-state benchmark date:** 2026-08-01  
 **Population:** 50 states plus the District of Columbia (51 jurisdictions)  
-**Application schema:** v3
+**Application schema:** v4
 
 ## Executive result
 
@@ -62,7 +63,7 @@ The requested distinction was phrased as “all sales or retail sales to consume
 
 ### Passed static UI audit
 
-`tests/ui-static-audit.py` passed **71 checks**, including:
+`tests/ui-static-audit.py` passed **99 checks**, including:
 
 - all required controls and unique DOM IDs;
 - JavaScript-to-DOM event target completeness;
@@ -116,6 +117,12 @@ node --check assets/app.js
 python3 tests/ui-static-audit.py
 node tests/export-smoke.mjs /tmp/nexus-export.xlsx
 ```
+
+## Version 1.1 UI and source-link QA
+
+Version 1.1 adds: Day/Night theme controls; a money-bag favicon; dark-green Excel actions; light-yellow input fields; light-purple secondary action buttons; synchronized top and bottom horizontal table scrollbars; inline result indicators; multi-criteria filters on the five requested columns; up-to-10-state research selection; and material-change siren/red-star alerts.
+
+All 51 primary source URLs were revalidated on **2026-08-08** against current official/state-authorized web destinations or current official indexed resources. Agency websites can change after the audit date, so the audit is a point-in-time validation rather than a perpetual guarantee. See `SOURCE_URL_AUDIT.md` for the complete list.
 
 ## Professional limitation
 

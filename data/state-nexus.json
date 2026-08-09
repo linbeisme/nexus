@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "dataset_name": "State Seller Sales Tax Collection & Remittance Requirements",
   "scope_note": "Economic-nexus reference for remote sellers. Seller withholding is treated as the duty to collect and remit sales/use tax, not income or payroll tax withholding.",
   "last_full_review": "2026-08-07",
@@ -32,7 +32,7 @@
       "rule_effective_date": "2018-10-01",
       "latest_change_date": "2018-10-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Alabama DOR \u2013 Remote Seller FAQ",
+      "source_title": "Alabama DOR – Remote Seller FAQ",
       "source_url": "https://www.revenue.alabama.gov/faqs/are-all-remote-sellers-required-to-register-in-alabama/",
       "notes": "Physical presence triggers registration regardless of economic threshold.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
@@ -49,7 +49,7 @@
       "rule_effective_date": "2020-04-01",
       "latest_change_date": "2025-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Alaska Remote Seller Sales Tax Commission \u2013 Business/Sellers",
+      "source_title": "Alaska Remote Seller Sales Tax Commission – Business/Sellers",
       "source_url": "https://arsstc.org/business-sellers/",
       "notes": "No statewide sales tax; local municipality participation is essential.",
       "nexus_sales_scope": "All / gross sales"
@@ -66,8 +66,8 @@
       "rule_effective_date": "2019-10-01",
       "latest_change_date": "2021-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Arizona DOR \u2013 Out-of-State Sellers",
-      "source_url": "https://azdor.gov/transaction-privilege-tax/retail-sales-subject-tpt/out-state-sellers",
+      "source_title": "Arizona DOR – Out-of-State Sellers",
+      "source_url": "https://azdor.gov/business/transaction-privilege-tax/retail-sales-subject-tpt/out-of-state-sellers",
       "notes": "Threshold stepped down from $200k (2019) to $150k (2020) to $100k (2021+).",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -83,8 +83,8 @@
       "rule_effective_date": "2019-07-01",
       "latest_change_date": "2019-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Arkansas DFA \u2013 Remote Sellers",
-      "source_url": "https://www.dfa.arkansas.gov/excise-tax/sales-and-use-tax/remote-sellers",
+      "source_title": "Arkansas DFA – Remote Sellers and Marketplace Facilitators",
+      "source_url": "https://www.dfa.arkansas.gov/office/taxes/excise-tax-administration/sales-use-tax/remote-sellers/",
       "notes": "Either dollar or transaction test can create economic nexus.",
       "nexus_sales_scope": "Taxable sales only"
     },
@@ -100,7 +100,7 @@
       "rule_effective_date": "2019-04-01",
       "latest_change_date": "2019-04-25",
       "last_reviewed": "2026-08-07",
-      "source_title": "CDTFA \u2013 Wayfair / Use Tax Collection Requirements",
+      "source_title": "CDTFA – Wayfair / Use Tax Collection Requirements",
       "source_url": "https://cdtfa.ca.gov/industry/wayfair/",
       "notes": "AB 147 raised the threshold to $500,000 and eliminated the transaction threshold.",
       "nexus_sales_scope": "All / gross sales of TPP"
@@ -117,8 +117,8 @@
       "rule_effective_date": "2018-12-01",
       "latest_change_date": "2019-04-14",
       "last_reviewed": "2026-08-07",
-      "source_title": "Colorado DOR \u2013 Remote Sellers",
-      "source_url": "https://tax.colorado.gov/remote-sellers",
+      "source_title": "Colorado DOR – Out-of-State Businesses",
+      "source_url": "https://tax.colorado.gov/out-of-state-businesses",
       "notes": "Home-rule local jurisdictions and Colorado's destination sourcing rules require separate attention.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
     },
@@ -134,8 +134,8 @@
       "rule_effective_date": "2018-12-01",
       "latest_change_date": "2019-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Connecticut DRS \u2013 Sales Tax Information",
-      "source_url": "https://portal.ct.gov/drs/sales-tax/tax-information",
+      "source_title": "Connecticut DRS – Registering with DRS",
+      "source_url": "https://portal.ct.gov/drs/businesses/new-business-resource-center/registering-with-drs",
       "notes": "Connecticut is unusual because both the dollar and transaction tests must be met.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
     },
@@ -151,8 +151,8 @@
       "rule_effective_date": "N/A",
       "latest_change_date": "N/A",
       "last_reviewed": "2026-08-07",
-      "source_title": "Delaware Division of Revenue",
-      "source_url": "https://revenue.delaware.gov/",
+      "source_title": "Delaware Division of Revenue – Exemption Certificates / No Sales Tax",
+      "source_url": "https://revenue.delaware.gov/business-tax-forms/exemption-certificates/",
       "notes": "Delaware imposes gross receipts and other taxes even though it has no sales tax.",
       "nexus_sales_scope": "No statewide sales tax"
     },
@@ -168,8 +168,8 @@
       "rule_effective_date": "2019-01-01",
       "latest_change_date": "2019-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "D.C. OTR \u2013 Wayfair Response Notice",
-      "source_url": "https://otr.cfo.dc.gov/sites/default/files/dc/sites/otr/page_content/attachments/Wayfair%20Response%20Notice%20%281%202%202019%29_0.pdf",
+      "source_title": "DC OTR – Sales and Use Tax FAQs",
+      "source_url": "https://otr.cfo.dc.gov/page/sales-and-use-tax-faqs",
       "notes": "Included because D.C. is commonly part of multistate sales-tax compliance matrices.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
     },
@@ -185,8 +185,8 @@
       "rule_effective_date": "2021-07-01",
       "latest_change_date": "2021-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Florida DOR \u2013 TIP 21A01-03",
-      "source_url": "https://floridarevenue.com/taxes/tips/Documents/TIP_21A01-03.pdf",
+      "source_title": "Florida DOR – Sales and Use Tax",
+      "source_url": "https://floridarevenue.com/taxes/taxesfees/Pages/sales_tax.aspx",
       "notes": "Florida's remote-seller economic nexus law took effect July 1, 2021.",
       "nexus_sales_scope": "Taxable sales only"
     },
@@ -202,8 +202,8 @@
       "rule_effective_date": "2019-01-01",
       "latest_change_date": "2020-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Georgia DOR \u2013 Sales & Use Tax",
-      "source_url": "https://dor.georgia.gov/taxes/business-taxes/sales-use-tax",
+      "source_title": "Georgia DOR – Out-of-State Sellers",
+      "source_url": "https://dor.georgia.gov/taxes/sales-use-tax/out-state-sellers",
       "notes": "Dollar threshold was reduced from $250,000 to $100,000 effective 2020-01-01.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
     },
@@ -219,7 +219,7 @@
       "rule_effective_date": "2018-07-01",
       "latest_change_date": "2018-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Hawaii DOTAX \u2013 Announcement 2018-10",
+      "source_title": "Hawaii DOTAX – Tax Announcement 2018-10 (Amended)",
       "source_url": "https://files.hawaii.gov/tax/news/announce/ann18-10_amended.pdf",
       "notes": "Hawaii imposes GET rather than a conventional retail sales tax.",
       "nexus_sales_scope": "All / gross sales"
@@ -236,8 +236,8 @@
       "rule_effective_date": "2019-06-01",
       "latest_change_date": "2019-06-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Idaho State Tax Commission \u2013 Online Sellers",
-      "source_url": "https://tax.idaho.gov/taxes/sales-use/guides-for-certain-groups/online-sellers/business-types/",
+      "source_title": "Idaho State Tax Commission – Online Sellers Guide",
+      "source_url": "https://tax.idaho.gov/taxes/sales-use/guides-for-certain-groups/online-sellers/online-guide/",
       "notes": "Review Idaho's guidance for marketplace and direct-sales treatment.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -253,7 +253,7 @@
       "rule_effective_date": "2018-10-01",
       "latest_change_date": "2026-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Illinois DOR \u2013 Remote Retailer / FY 2026-12",
+      "source_title": "Illinois DOR – FY 2026-12",
       "source_url": "https://tax.illinois.gov/research/publications/bulletins/fy-2026-12.html",
       "notes": "The 200-transaction test was eliminated effective 2026-01-01.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
@@ -270,7 +270,7 @@
       "rule_effective_date": "2018-10-01",
       "latest_change_date": "2024-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Indiana DOR \u2013 Remote Sellers",
+      "source_title": "Indiana DOR – Remote Seller",
       "source_url": "https://www.in.gov/dor/i-am-a/business-corp/remote-sellers/",
       "notes": "Transaction-count threshold removed effective 2024-01-01.",
       "nexus_sales_scope": "All / gross sales"
@@ -287,8 +287,8 @@
       "rule_effective_date": "2019-01-01",
       "latest_change_date": "2019-05-03",
       "last_reviewed": "2026-08-07",
-      "source_title": "Iowa DOR \u2013 Remote Sellers",
-      "source_url": "https://revenue.iowa.gov/taxes/tax-guidance/sales-use-excise-tax/remote-sellers",
+      "source_title": "Iowa DOR – Remote Sellers & Marketplace Facilitators",
+      "source_url": "https://revenue.iowa.gov/taxes/tax-guidance/sales-use-excise-tax/remote-sellers-marketplace-facilitators",
       "notes": "Iowa removed the transaction threshold shortly after implementation.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -304,8 +304,8 @@
       "rule_effective_date": "2021-07-01",
       "latest_change_date": "2021-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Kansas DOR \u2013 Notice 21-17",
-      "source_url": "https://www.ksrevenue.org/taxnotices/notice21-17.pdf",
+      "source_title": "Kansas DOR – Marketplace Facilitators and Remote Sellers",
+      "source_url": "https://www.ksrevenue.gov/taxmarketplace.html",
       "notes": "Kansas enacted a $100,000 small-seller exception effective 2021-07-01.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -321,8 +321,8 @@
       "rule_effective_date": "2018-10-01",
       "latest_change_date": "2026-08-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Kentucky LRC \u2013 HB 757 (2026)",
-      "source_url": "https://apps.legislature.ky.gov/record/26rs/hb757.html",
+      "source_title": "Kentucky LRC – KRS 139.340",
+      "source_url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=58190",
       "notes": "Effective August 1, 2026, the 200-transaction nexus prong was deleted; the $100,000 gross-receipts threshold remains.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -338,8 +338,8 @@
       "rule_effective_date": "2020-07-01",
       "latest_change_date": "2023-08-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Louisiana Sales and Use Tax Commission for Remote Sellers",
-      "source_url": "https://remotesellers.louisiana.gov/",
+      "source_title": "Louisiana Remote Sellers Commission – FAQs",
+      "source_url": "https://remotesellers.louisiana.gov/FAQ",
       "notes": "Transaction test removed effective 2023-08-01.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -355,8 +355,8 @@
       "rule_effective_date": "2018-07-01",
       "latest_change_date": "2022-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Maine Revised Statutes \u2013 36 M.R.S. \u00a71951-B",
-      "source_url": "https://legislature.maine.gov/statutes/36/title36sec1951-B.html",
+      "source_title": "Maine Revenue Services – Guidance for Remote Sellers",
+      "source_url": "https://www11.maine.gov/revenue/taxes/sales-use-service-provider-tax/guidance-documents/remote-sellers",
       "notes": "Older agency guidance may still display historical transaction-test language; use current statute.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -372,8 +372,8 @@
       "rule_effective_date": "2018-10-01",
       "latest_change_date": "2018-10-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Maryland Comptroller \u2013 Out-of-State Vendors",
-      "source_url": "https://services.marylandcomptroller.gov/taxes/en/sales-and-use-tax-for-out-of-state-vendors",
+      "source_title": "Maryland Comptroller – Sales and Use Tax Alert (Remote Sellers)",
+      "source_url": "https://www.marylandcomptroller.gov/legal-library/sut-ta-sep-01-2018.html",
       "notes": "Maryland retains both dollar and transaction thresholds.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -389,7 +389,7 @@
       "rule_effective_date": "2019-10-01",
       "latest_change_date": "2019-10-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Massachusetts DOR \u2013 Remote Seller & Marketplace FAQs",
+      "source_title": "Massachusetts DOR – Remote Seller and Marketplace Facilitator FAQs",
       "source_url": "https://www.mass.gov/info-details/remote-seller-and-marketplace-facilitator-faqs",
       "notes": "2019 law lowered dollar threshold and eliminated prior transaction test.",
       "nexus_sales_scope": "All / gross sales"
@@ -406,8 +406,8 @@
       "rule_effective_date": "2018-10-01",
       "latest_change_date": "2018-10-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Michigan Treasury \u2013 Remote Sellers",
-      "source_url": "https://www.michigan.gov/en/taxes/business-taxes/sales-use-tax/resources/sales-and-use-tax-information-for-remote-sellers",
+      "source_title": "Michigan Treasury – Remote Seller FAQ",
+      "source_url": "https://www.michigan.gov/taxes/business-taxes/sales-use-tax/information/remote-seller-faq",
       "notes": "Michigan retains the 200-transaction alternative test.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -423,8 +423,8 @@
       "rule_effective_date": "2018-10-01",
       "latest_change_date": "2019-10-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Minnesota DOR \u2013 Remote Sellers",
-      "source_url": "https://www.revenue.state.mn.us/remote-sellers",
+      "source_title": "Minnesota DOR – Who Needs to Register?",
+      "source_url": "https://www.revenue.state.mn.us/guide/who-needs-register",
       "notes": "Threshold structure changed effective 2019-10-01.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
     },
@@ -440,8 +440,8 @@
       "rule_effective_date": "2018-09-01",
       "latest_change_date": "2018-09-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Mississippi DOR \u2013 Remote Sellers",
-      "source_url": "https://www.dor.ms.gov/business/remote-sellers",
+      "source_title": "Mississippi DOR – Sales and Use Tax Guidance for Online Sellers",
+      "source_url": "https://www.dor.ms.gov/sites/default/files/Business/Online%20Seller%20Guidance.pdf",
       "notes": "One of the higher state dollar thresholds.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -457,7 +457,7 @@
       "rule_effective_date": "2023-01-01",
       "latest_change_date": "2023-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Missouri DOR \u2013 Remote Seller FAQ",
+      "source_title": "Missouri DOR – Remote Seller and Marketplace Facilitator FAQs",
       "source_url": "https://dor.mo.gov/faq/taxation/business/remote-seller-and-marketplace-facilitator.html",
       "notes": "Missouri was the last sales-tax state to implement post-Wayfair economic nexus.",
       "nexus_sales_scope": "Taxable sales only"
@@ -474,8 +474,8 @@
       "rule_effective_date": "N/A",
       "latest_change_date": "N/A",
       "last_reviewed": "2026-08-07",
-      "source_title": "Montana Department of Revenue",
-      "source_url": "https://mtrevenue.gov/",
+      "source_title": "Montana DOR – General Sales Tax Guidance",
+      "source_url": "https://revenue.mt.gov/taxes/general-sales-tax",
       "notes": "Certain resort/local or special taxes may still apply.",
       "nexus_sales_scope": "No statewide sales tax"
     },
@@ -491,8 +491,8 @@
       "rule_effective_date": "2019-04-01",
       "latest_change_date": "2019-04-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Nebraska DOR \u2013 Remote Sellers",
-      "source_url": "https://revenue.nebraska.gov/businesses/information-remote-sellers-and-marketplace-facilitators",
+      "source_title": "Nebraska DOR – Remote Seller and Marketplace Facilitator FAQs",
+      "source_url": "https://revenue.nebraska.gov/about/frequently-asked-questions/remote-seller-and-marketplace-facilitator-faqs",
       "notes": "Administrative compliance began 2019-01-01; enacted legislation effective 2019-04-01.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
     },
@@ -508,8 +508,8 @@
       "rule_effective_date": "2018-11-01",
       "latest_change_date": "2018-11-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Nevada Department of Taxation",
-      "source_url": "https://tax.nv.gov/FAQs/Marketplace_Facilitators__Marketplace_Sellers___Remote_Sellers/",
+      "source_title": "Nevada Department of Taxation – FAQs",
+      "source_url": "https://tax.nv.gov/FAQs/",
       "notes": "Nevada retains the transaction-count alternative.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
     },
@@ -525,8 +525,8 @@
       "rule_effective_date": "N/A",
       "latest_change_date": "N/A",
       "last_reviewed": "2026-08-07",
-      "source_title": "New Hampshire Department of Revenue Administration",
-      "source_url": "https://www.revenue.nh.gov/",
+      "source_title": "New Hampshire DRA – Does New Hampshire Have a Sales Tax?",
+      "source_url": "https://www.revenue.nh.gov/faq/does-new-hampshire-have-sales-tax",
       "notes": "New Hampshire does not impose a general sales tax.",
       "nexus_sales_scope": "No statewide sales tax"
     },
@@ -542,7 +542,7 @@
       "rule_effective_date": "2018-11-01",
       "latest_change_date": "2018-11-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "New Jersey Division of Taxation \u2013 Remote Sellers",
+      "source_title": "New Jersey Division of Taxation – Remote Sellers",
       "source_url": "https://www.nj.gov/treasury/taxation/remotesellers.shtml",
       "notes": "New Jersey retains the transaction-count alternative.",
       "nexus_sales_scope": "All / gross sales"
@@ -559,8 +559,8 @@
       "rule_effective_date": "2019-07-01",
       "latest_change_date": "2019-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "New Mexico TRD \u2013 Gross Receipts Tax Overview",
-      "source_url": "https://www.tax.newmexico.gov/businesses/gross-receipts-overview/",
+      "source_title": "New Mexico TRD – Determining Nexus",
+      "source_url": "https://www.tax.newmexico.gov/businesses/determining-nexus/",
       "notes": "New Mexico imposes gross receipts tax rather than a conventional retail sales tax.",
       "nexus_sales_scope": "Taxable sales only"
     },
@@ -576,7 +576,7 @@
       "rule_effective_date": "2018-06-21",
       "latest_change_date": "2019-06-24",
       "last_reviewed": "2026-08-07",
-      "source_title": "New York Tax Department \u2013 No Physical Presence Registration",
+      "source_title": "New York Tax Department – Registration Requirement / Nexus",
       "source_url": "https://www.tax.ny.gov/pubs_and_bulls/publications/sales/nexus.htm",
       "notes": "Both the dollar and transaction tests must be met.",
       "nexus_sales_scope": "All / gross sales of TPP"
@@ -593,7 +593,7 @@
       "rule_effective_date": "2018-11-01",
       "latest_change_date": "2024-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "NCDOR \u2013 Remote Sales",
+      "source_title": "North Carolina DOR – Remote Sales",
       "source_url": "https://www.ncdor.gov/taxes-forms/sales-and-use-tax/other-sales-and-use-tax-resources/remote-sales",
       "notes": "200-transaction threshold removed effective 2024-07-01.",
       "nexus_sales_scope": "All / gross sales"
@@ -610,7 +610,7 @@
       "rule_effective_date": "2018-06-21",
       "latest_change_date": "2019-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "North Dakota Tax Commissioner \u2013 Sales and Use Tax",
+      "source_title": "North Dakota Tax Commissioner – Sales and Use Tax",
       "source_url": "https://www.tax.nd.gov/sales-and-use-tax",
       "notes": "The 200-transaction test was repealed effective July 1, 2019; current small-seller exception is based on taxable sales exceeding $100,000.",
       "nexus_sales_scope": "Taxable sales only"
@@ -627,7 +627,7 @@
       "rule_effective_date": "2019-08-01",
       "latest_change_date": "2019-08-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Ohio Revised Code \u2013 R.C. 5741.01",
+      "source_title": "Ohio Revised Code – Section 5741.01",
       "source_url": "https://codes.ohio.gov/ohio-revised-code/section-5741.01",
       "notes": "Ohio retains the 200-transaction alternative.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
@@ -644,8 +644,8 @@
       "rule_effective_date": "2019-11-01",
       "latest_change_date": "2023-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Oklahoma Tax Commission \u2013 Businesses / Remote Sellers",
-      "source_url": "https://oklahoma.gov/tax/helpcenter/businesses.html?q=BUSMRK1",
+      "source_title": "Oklahoma Tax Commission – Sales and Use Tax",
+      "source_url": "https://oklahoma.gov/tax/businesses/sales-use-tax.html",
       "notes": "Guidance broadened wording from TPP to products effective 2023-01-01.",
       "nexus_sales_scope": "Taxable sales only"
     },
@@ -661,8 +661,8 @@
       "rule_effective_date": "N/A",
       "latest_change_date": "N/A",
       "last_reviewed": "2026-08-07",
-      "source_title": "Oregon Department of Revenue \u2013 Businesses",
-      "source_url": "https://www.oregon.gov/dor/programs/businesses/Pages/default.aspx",
+      "source_title": "Oregon DOR – Sales Tax in Oregon",
+      "source_url": "https://www.oregon.gov/dor/programs/businesses/Pages/sales-tax.aspx",
       "notes": "Certain local/special taxes may apply.",
       "nexus_sales_scope": "No statewide sales tax"
     },
@@ -678,8 +678,8 @@
       "rule_effective_date": "2019-07-01",
       "latest_change_date": "2019-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Pennsylvania DOR \u2013 Remote Sellers",
-      "source_url": "https://www.revenue.pa.gov/TaxTypes/SUT/Pages/Remote-Sellers.aspx",
+      "source_title": "Pennsylvania DOR – Online Retailers",
+      "source_url": "https://www.pa.gov/agencies/revenue/resources/tax-types-and-information/sales-use-and-hotel-occupancy-tax/online-retailers",
       "notes": "Pennsylvania also had prior notice-and-reporting rules before mandatory economic-nexus collection.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -695,8 +695,8 @@
       "rule_effective_date": "2019-07-01",
       "latest_change_date": "2019-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Rhode Island Division of Taxation",
-      "source_url": "https://tax.ri.gov/",
+      "source_title": "Rhode Island Division of Taxation – Remote Sellers",
+      "source_url": "https://tax.ri.gov/tax-sections/sales-excise-taxes/remote-sellers",
       "notes": "Mandatory registration replaced earlier notice/reporting election regime.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -712,7 +712,7 @@
       "rule_effective_date": "2018-11-01",
       "latest_change_date": "2018-11-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "SCDOR \u2013 Remote Sellers",
+      "source_title": "South Carolina DOR – Remote Sellers",
       "source_url": "https://dor.sc.gov/sales-use-tax-index/sales-tax/remote-sellers",
       "notes": "No transaction-count alternative.",
       "nexus_sales_scope": "All / gross sales"
@@ -729,7 +729,7 @@
       "rule_effective_date": "2018-11-01",
       "latest_change_date": "2023-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "South Dakota DOR \u2013 Sales & Use Tax",
+      "source_title": "South Dakota DOR – Sales & Use Tax",
       "source_url": "https://dor.sd.gov/businesses/taxes/sales-use-tax/",
       "notes": "South Dakota removed its 200-transaction threshold effective 2023-07-01.",
       "nexus_sales_scope": "All / gross sales"
@@ -746,7 +746,7 @@
       "rule_effective_date": "2019-10-01",
       "latest_change_date": "2020-10-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Tennessee DOR \u2013 Out-of-State Dealers",
+      "source_title": "Tennessee DOR – Out-of-State Dealers / Marketplace Facilitators",
       "source_url": "https://www.tn.gov/revenue/taxes/sales-and-use-tax/out-of-state-dealers-marketplace-facilitators.html",
       "notes": "Threshold reduced from $500,000 to $100,000 effective 2020-10-01.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
@@ -763,7 +763,7 @@
       "rule_effective_date": "2019-10-01",
       "latest_change_date": "2019-10-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Texas Comptroller \u2013 Remote Sellers",
+      "source_title": "Texas Comptroller – Remote Sellers",
       "source_url": "https://comptroller.texas.gov/taxes/sales/remote-sellers.php",
       "notes": "Texas uses a $500,000 safe-harbor threshold.",
       "nexus_sales_scope": "All / gross sales"
@@ -780,7 +780,7 @@
       "rule_effective_date": "2019-01-01",
       "latest_change_date": "2025-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Utah State Tax Commission \u2013 Remote Sellers",
+      "source_title": "Utah State Tax Commission – Out-of-State Remote Sellers",
       "source_url": "https://tax.utah.gov/business/sales-tax/other-sales-tax/out-of-state-remote-sellers/",
       "notes": "200-transaction threshold removed effective 2025-07-01.",
       "nexus_sales_scope": "All / gross sales"
@@ -797,8 +797,8 @@
       "rule_effective_date": "2018-07-01",
       "latest_change_date": "2018-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Vermont Department of Taxes \u2013 Out-of-State Vendors",
-      "source_url": "https://tax.vermont.gov/business-and-corp/sales-and-use-tax/out-state-vendors",
+      "source_title": "Vermont Legislature – Title 32, Chapter 233 Sales and Use Tax",
+      "source_url": "https://legislature.vermont.gov/statutes/chapter/32/233",
       "notes": "Vermont retains the 200-transaction alternative.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -814,8 +814,8 @@
       "rule_effective_date": "2019-07-01",
       "latest_change_date": "2019-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Virginia Tax \u2013 Remote Sellers / Economic Nexus",
-      "source_url": "https://www.tax.virginia.gov/remote-sellers-marketplace-facilitators-and-economic-nexus",
+      "source_title": "Virginia Tax – Remote Sellers, Marketplace Facilitators, Economic Nexus",
+      "source_url": "https://www.tax.virginia.gov/remote-sellers-marketplace-facilitators-economic-nexus",
       "notes": "Virginia retains a transaction-count alternative.",
       "nexus_sales_scope": "Retail sales only (excludes resale)"
     },
@@ -831,8 +831,8 @@
       "rule_effective_date": "2018-10-01",
       "latest_change_date": "2020-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Washington DOR \u2013 Remote Sellers",
-      "source_url": "https://dor.wa.gov/education/industry-guides/remote-sellers",
+      "source_title": "Washington DOR – Remote Sellers",
+      "source_url": "https://dor.wa.gov/taxes-rates/retail-sales-tax/marketplace-fairness-leveling-playing-field/remote-sellers",
       "notes": "Washington also has B&O tax considerations; economic nexus can apply beyond retail sales tax.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -848,8 +848,8 @@
       "rule_effective_date": "2019-01-01",
       "latest_change_date": "2019-01-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "West Virginia Tax Division \u2013 Remote Sellers",
-      "source_url": "https://tax.wv.gov/Business/SalesAndUseTax/ECommerce/RemoteSellers/Pages/RemoteSellersAndWestVirginiaTax.aspx",
+      "source_title": "West Virginia Tax Division – Remote Sellers",
+      "source_url": "https://tax.wv.gov/business/salesandusetax/ecommerce/remotesellers/Pages/RemoteSellersAndWestVirginiaTax.aspx",
       "notes": "West Virginia retains the 200-transaction alternative.",
       "nexus_sales_scope": "All / gross sales"
     },
@@ -865,7 +865,7 @@
       "rule_effective_date": "2018-10-01",
       "latest_change_date": "2021-02-20",
       "last_reviewed": "2026-08-07",
-      "source_title": "Wisconsin DOR \u2013 Remote Sellers",
+      "source_title": "Wisconsin DOR – Remote Sellers / Wayfair",
       "source_url": "https://www.revenue.wi.gov/Pages/Businesses/remote-sellers.aspx",
       "notes": "200-transaction threshold removed effective 2021-02-20.",
       "nexus_sales_scope": "All / gross sales"
@@ -882,10 +882,14 @@
       "rule_effective_date": "2019-02-01",
       "latest_change_date": "2024-07-01",
       "last_reviewed": "2026-08-07",
-      "source_title": "Wyoming Department of Revenue \u2013 Remote Sellers",
-      "source_url": "https://revenue.wyo.gov/Excise-Tax-Division",
+      "source_title": "Wyoming DOR – Rules and Regulations (Chapter 2 Sales and Use Tax)",
+      "source_url": "https://revenue.wyo.gov/rules-and-regulations",
       "notes": "Transaction threshold removed effective 2024-07-01.",
       "nexus_sales_scope": "All / gross sales"
     }
-  ]
+  ],
+  "app_version": "1.1",
+  "source_url_audit_date": "2026-08-08",
+  "source_url_audit_count": 51,
+  "source_url_audit_status": "51/51 primary-source URLs verified as current official/state-authorized web destinations or current official indexed resources on 2026-08-08. Future agency URL changes cannot be guaranteed."
 }

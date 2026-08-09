@@ -4,12 +4,15 @@ import path from 'node:path';
 const root = process.cwd();
 const file = path.join(root, 'data', 'state-nexus.json');
 const doc = JSON.parse(fs.readFileSync(file, 'utf8'));
-const requiredMeta = ['schema_version','dataset_name','last_full_review','baseline_cross_check','audit_date','review_cycle_days','review_due_days'];
+const requiredMeta = ['schema_version','dataset_name','last_full_review','baseline_cross_check','audit_date','review_cycle_days','review_due_days','app_version','source_url_audit_date','source_url_audit_count','source_url_audit_status'];
 const requiredFields = ['state','status','threshold','transaction_test','measurement_period','nexus_sales_scope','sales_basis','collection_timing','marketplace_note','rule_effective_date','latest_change_date','last_reviewed','source_title','source_url','notes'];
 const allowedScopes = new Set(['All / gross sales','All / gross sales of TPP','Retail sales only (excludes resale)','Taxable sales only','No statewide sales tax']);
 const errors=[];
 for(const k of requiredMeta){if(doc[k]===undefined || doc[k]===null || doc[k]==='') errors.push(`Missing metadata: ${k}`);}
-for(const k of ['last_full_review','baseline_cross_check','audit_date']){if(doc[k] && !/^\d{4}-\d{2}-\d{2}$/.test(String(doc[k]))) errors.push(`${k} must be YYYY-MM-DD`);}
+for(const k of ['last_full_review','baseline_cross_check','audit_date','source_url_audit_date']){if(doc[k] && !/^\d{4}-\d{2}-\d{2}$/.test(String(doc[k]))) errors.push(`${k} must be YYYY-MM-DD`);}
+if(doc.schema_version!==4) errors.push(`Expected schema_version 4, found ${doc.schema_version}`);
+if(doc.app_version!=='1.1') errors.push(`Expected app_version 1.1, found ${doc.app_version}`);
+if(doc.source_url_audit_count!==51) errors.push(`Expected source_url_audit_count 51, found ${doc.source_url_audit_count}`);
 if(!Array.isArray(doc.states)) errors.push('states must be an array');
 else{
   if(doc.states.length!==51) errors.push(`Expected 51 jurisdictions, found ${doc.states.length}`);
