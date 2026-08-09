@@ -45,7 +45,9 @@ required_ids = {
     "proposalList", "approveAll", "downloadHistory", "footerMeta", "editDialog",
     "editForm", "editFields", "saveEdit", "themeToggle", "changeAlert",
     "tableScrollTop", "tableScrollTopSpacer", "tableWrap", "statePicker",
-    "statePickerSearch", "stateSelectionCount", "clearStateSelection", "stateSelectionList"
+    "statePickerControls", "statePickerToggle", "selectedStateSummary",
+    "statePickerSearch", "stateSelectionCount", "clearStateSelection", "stateSelectionList",
+    "versionBaselineLine", "auditLine", "sourceAuditLine"
 }
 ids = [tag.get("id") for tag in soup.find_all(attrs={"id": True})]
 for rid in sorted(required_ids):
@@ -103,6 +105,10 @@ check("Result chips are inline with the guide control", bool(soup.select_one(".t
 check("Material-change siren and state-star logic exists", "changeAlert" in js and "state-change-star" in js and "MATERIAL_CHANGE_KEYS" in js)
 check("Research scope supports selected states", bool(soup.select_one('#updateScope option[value="selected"]')) and "selectedResearchStates" in js)
 check("Research state selection is capped at 10", "selectedResearchStates.size>=10" in js)
+check("Research state selector can collapse", "statePickerExpanded" in js and "toggleStatePicker" in js and soup.find(id="statePickerToggle") is not None)
+check("Header metadata is split into three lines", all(soup.find(id=x) is not None for x in ["versionBaselineLine","auditLine","sourceAuditLine"]))
+check("Multi-filter popover is viewport-positioned", ".multi-filter-menu{position:fixed" in compact_css and "positionMultiFilterMenu" in js)
+check("Only one multi-filter popover stays open", "querySelectorAll('.multi-filter[open]')" in js)
 for key in ["state","review_status","status","transaction_test","nexus_sales_scope"]:
     check(f"Multi-criteria filter enabled for {key}", key in re.search(r"MULTI_FILTER_KEYS = new Set\(\[(.*?)\]\)", js, re.S).group(1))
 check("Source URL audit metadata is present", dataset.get("source_url_audit_date") == "2026-08-08" and dataset.get("source_url_audit_count") == 51)

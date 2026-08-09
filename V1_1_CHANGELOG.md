@@ -40,3 +40,9 @@
 ## Change-detection limitation
 
 The GitHub Pages app is static and does not continuously crawl state websites by itself. A change alert is raised when the controlled research/update workflow returns an explicit `change_detected: true`, when a material staged field differs from the published record, or when a published record carries an unresolved change flag. This prevents the UI from implying real-time legal monitoring that is not actually occurring.
+
+
+## UI refinement (2026-08-08)
+- Reworked multi-select filter popovers to prevent clipping, narrow text wrapping, and overlapping open menus.
+- Split header publication metadata into three compact lines.
+- Added a collapsible state selector for the up-to-10-state research workflow; it is collapsed by default to save vertical space.

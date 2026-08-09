@@ -41,6 +41,7 @@ let proposals = [];
 let filters = makeBlankFilters();
 let dollarThresholdOnly = false;
 let selectedResearchStates = new Set(loadLocal(LS_RESEARCH_STATES,[]).slice(0,10));
+let statePickerExpanded = false;
 let scrollSyncBound = false;
 
 function makeBlankFilters(){return Object.fromEntries(columns.filter(([k])=>!k.startsWith('_')).map(([k])=>[k,MULTI_FILTER_KEYS.has(k)?[]:'']));}
@@ -94,7 +95,9 @@ async function init(){
     applyTheme(document.documentElement.dataset.theme==='night'?'night':'day',false);
     buildHeader(); bindEvents(); renderStatePicker(); updateResearchScopeUI(); render(); renderProposals(); renderMeta(); setupTableScrollSync();
   }catch(err){
-    document.getElementById('datasetStamp').textContent='Dataset failed to load';
+    document.getElementById('versionBaselineLine').textContent='Dataset failed to load';
+    document.getElementById('auditLine').textContent='Independent audit: —';
+    document.getElementById('sourceAuditLine').textContent='Source links: —';
     document.getElementById('tbody').innerHTML=`<tr><td style="padding:20px;max-width:900px"><strong>Unable to load ${esc(DATA_URL)}.</strong><br>${esc(err.message)}<br><br>This GitHub-ready version must be served over HTTP/HTTPS (such as GitHub Pages). If you opened index.html directly from your filesystem, use a local web server or publish the repository to GitHub Pages.</td></tr>`;
   }
 }
@@ -123,8 +126,9 @@ function renderMeta(){
   document.getElementById('reviewDueCount').textContent=String(due);
   document.getElementById('approvedChangeCount').textContent=String(new Set(localHistory.filter(x=>['approved_update','manual_edit'].includes(x.type) && x.state).map(x=>x.state)).size);
   document.getElementById('proposalCount').textContent=String(proposals.length);
-  const linkAudit=meta.source_url_audit_date?` · Source links: ${meta.source_url_audit_count || 51}/51 verified ${meta.source_url_audit_date}`:'';
-  document.getElementById('datasetStamp').textContent=`v${meta.app_version || APP_VERSION} · Published baseline: ${meta.last_full_review || '—'} · Independent audit: ${meta.audit_date || '—'}${linkAudit}`;
+  document.getElementById('versionBaselineLine').textContent=`Version ${meta.app_version || APP_VERSION} · Published baseline: ${meta.last_full_review || '—'}`;
+  document.getElementById('auditLine').textContent=`Independent audit: ${meta.audit_date || '—'}`;
+  document.getElementById('sourceAuditLine').textContent=meta.source_url_audit_date?`Source links: ${meta.source_url_audit_count || 51}/51 verified ${meta.source_url_audit_date}`:'Source links: —';
   document.getElementById('footerMeta').textContent=`App v${meta.app_version || APP_VERSION} · Independent audit: ${meta.audit_date || '—'} · Benchmark cross-check: ${meta.baseline_cross_check || '—'} · Source-link audit: ${meta.source_url_audit_date || '—'} · Review-due interval: ${meta.review_due_days || 45} days · ${data.length} jurisdictions.`;
   const alert=document.getElementById('changeAlert');
   if(alertStates.length){
@@ -141,6 +145,17 @@ function filterOptions(key){
   return [...new Set(values.map(v=>String(v)).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
 }
 function multiSummary(key){const n=(filters[key]||[]).length; return n?`${n} selected`:'All';}
+function positionMultiFilterMenu(details,menu){
+  const summary=details.querySelector('summary'); if(!summary) return;
+  const r=summary.getBoundingClientRect();
+  const width=Math.min(360,Math.max(260,window.innerWidth-24));
+  let left=Math.max(12,r.left);
+  if(left+width>window.innerWidth-12) left=Math.max(12,window.innerWidth-width-12);
+  let top=r.bottom+5;
+  const estimated=Math.min(380,window.innerHeight-24);
+  if(top+estimated>window.innerHeight-12 && r.top>estimated+12) top=Math.max(12,r.top-estimated-5);
+  menu.style.width=`${width}px`; menu.style.left=`${left}px`; menu.style.top=`${Math.max(12,top)}px`;
+}
 function buildMultiFilter(key){
   const details=document.createElement('details'); details.className='multi-filter'; details.dataset.key=key;
   const summary=document.createElement('summary'); summary.textContent=multiSummary(key); details.appendChild(summary);
@@ -159,6 +174,13 @@ function buildMultiFilter(key){
   const actions=document.createElement('div'); actions.className='multi-filter-actions';
   const clear=document.createElement('button'); clear.type='button'; clear.textContent='Clear'; clear.addEventListener('click',()=>{filters[key]=[]; opts.querySelectorAll('input[type="checkbox"]').forEach(x=>x.checked=false); summary.textContent='All'; render();}); actions.appendChild(clear); menu.appendChild(actions);
   search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase(); opts.querySelectorAll('.multi-option').forEach(el=>el.classList.toggle('hidden',!!q&&!el.dataset.search.includes(q)));});
+  details.addEventListener('toggle',()=>{
+    if(details.open){
+      document.querySelectorAll('.multi-filter[open]').forEach(other=>{if(other!==details)other.removeAttribute('open');});
+      requestAnimationFrame(()=>positionMultiFilterMenu(details,menu));
+      search.focus({preventScroll:true});
+    }
+  });
   details.appendChild(menu);
   return details;
 }
@@ -235,7 +257,7 @@ function setupTableScrollSync(){
   if(scrollSyncBound) return; scrollSyncBound=true;
   const top=document.getElementById('tableScrollTop'), wrap=document.getElementById('tableWrap'); let syncing=false;
   top.addEventListener('scroll',()=>{if(syncing)return;syncing=true;wrap.scrollLeft=top.scrollLeft;requestAnimationFrame(()=>syncing=false);});
-  wrap.addEventListener('scroll',()=>{if(syncing)return;syncing=true;top.scrollLeft=wrap.scrollLeft;requestAnimationFrame(()=>syncing=false);});
+  wrap.addEventListener('scroll',()=>{document.querySelectorAll('.multi-filter[open]').forEach(d=>d.removeAttribute('open'));if(syncing)return;syncing=true;top.scrollLeft=wrap.scrollLeft;requestAnimationFrame(()=>syncing=false);});
   if('ResizeObserver' in window){new ResizeObserver(syncTableScrollWidth).observe(document.getElementById('nexusTable'));}
   window.addEventListener('resize',syncTableScrollWidth); syncTableScrollWidth();
 }
@@ -266,7 +288,15 @@ function researchRows(){
   if(scope==='visible') return visibleRows();
   return data.filter(r=>selectedResearchStates.has(r.state));
 }
-function updateResearchScopeUI(){document.getElementById('statePicker').classList.toggle('hidden',document.getElementById('updateScope').value!=='selected');}
+function updateResearchScopeUI(){
+  const selected=document.getElementById('updateScope').value==='selected';
+  const controls=document.getElementById('statePickerControls'), picker=document.getElementById('statePicker'), toggle=document.getElementById('statePickerToggle');
+  controls.classList.toggle('hidden',!selected);
+  picker.classList.toggle('hidden',!selected || !statePickerExpanded);
+  toggle.setAttribute('aria-expanded',String(selected && statePickerExpanded));
+  toggle.textContent=statePickerExpanded?'Hide state selector':`Show state selector (${selectedResearchStates.size}/10)`;
+}
+function toggleStatePicker(){statePickerExpanded=!statePickerExpanded;updateResearchScopeUI();if(statePickerExpanded)setTimeout(()=>document.getElementById('statePickerSearch').focus(),0);}
 function renderStatePicker(){
   const list=document.getElementById('stateSelectionList'); if(!list) return; const q=(document.getElementById('statePickerSearch')?.value||'').trim().toLowerCase(); list.innerHTML='';
   data.filter(r=>!q||r.state.toLowerCase().includes(q)).forEach(r=>{
@@ -279,6 +309,10 @@ function renderStatePicker(){
     const span=document.createElement('span'); span.textContent=r.state; label.append(cb,span); list.appendChild(label);
   });
   const count=document.getElementById('stateSelectionCount'); count.textContent=`${selectedResearchStates.size} / 10 selected`; count.classList.toggle('selection-limit',selectedResearchStates.size>=10);
+  const names=[...selectedResearchStates].sort((a,b)=>a.localeCompare(b));
+  const summary=document.getElementById('selectedStateSummary');
+  if(summary) summary.textContent=names.length?`Selected: ${names.slice(0,4).join(', ')}${names.length>4?` +${names.length-4} more`:''}`:'No states selected';
+  updateResearchScopeUI();
 }
 function buildUpdatePrompt(){
   const scope=researchRows(); const out=document.getElementById('updatePrompt');
@@ -381,6 +415,7 @@ function bindEvents(){
   document.getElementById('downloadDataset').addEventListener('click',downloadDataset);
   document.getElementById('resetWorkingCopy').addEventListener('click',resetWorking);
   document.getElementById('updateScope').addEventListener('change',updateResearchScopeUI);
+  document.getElementById('statePickerToggle').addEventListener('click',toggleStatePicker);
   document.getElementById('statePickerSearch').addEventListener('input',renderStatePicker);
   document.getElementById('clearStateSelection').addEventListener('click',()=>{selectedResearchStates.clear();persistResearchStates();renderStatePicker();});
   document.getElementById('buildPrompt').addEventListener('click',buildUpdatePrompt);

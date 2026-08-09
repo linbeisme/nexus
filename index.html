@@ -27,7 +27,11 @@
     </div>
     <div class="header-tools">
       <div class="stamp-line">
-        <div id="datasetStamp" class="stamp">Loading dataset…</div>
+        <div id="datasetStamp" class="stamp meta-stamp" aria-label="Publication and audit information">
+          <div id="versionBaselineLine" class="stamp-item">Loading dataset…</div>
+          <div id="auditLine" class="stamp-item">Independent audit: —</div>
+          <div id="sourceAuditLine" class="stamp-item">Source links: —</div>
+        </div>
         <div id="changeAlert" class="change-alert hidden" role="status" aria-live="polite" title="Material change alert">🚨 <span>Change detected</span></div>
       </div>
       <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" title="Switch between day and night themes">
@@ -97,7 +101,11 @@
           <option value="visible">Visible / filtered rows</option>
           <option value="all">All jurisdictions</option>
         </select>
-        <div id="statePicker" class="state-picker">
+        <div id="statePickerControls" class="state-picker-controls">
+          <button id="statePickerToggle" type="button" aria-expanded="false" aria-controls="statePicker">Show state selector (0/10)</button>
+          <span id="selectedStateSummary" class="selected-state-summary">No states selected</span>
+        </div>
+        <div id="statePicker" class="state-picker hidden">
           <div class="state-picker-head">
             <input id="statePickerSearch" type="search" placeholder="Find a state…" aria-label="Find a state for research selection">
             <span id="stateSelectionCount" class="badge neutral">0 / 10 selected</span>
