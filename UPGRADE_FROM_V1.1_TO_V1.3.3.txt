@@ -1,0 +1,7 @@
+State Sales Tax Nexus App - v1.1 to v1.3.3 update-only package
+
+Replace/add the files in this package using the same repository paths.
+This update includes all prior v1.2/v1.3 application changes represented by the packaged app/data files plus the v1.3.3 professional-use disclosure UX change.
+No unrelated repository files need to be deleted.
+
+After upload/commit, verify the page shows v1.3.3 and click Professional-use note to confirm the scope/limitations modal opens.

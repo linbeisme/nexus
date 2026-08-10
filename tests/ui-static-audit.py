@@ -99,8 +99,8 @@ check("Phone responsive breakpoint exists", "@media (max-width:620px)" in css)
 check("Phone toolbar controls expand full width", ".toolbar-row>*:not(.stats){width:100%}" in compact_css)
 
 
-# Version 1.3.2 UX requirements.
-check("Version 1.3.2 is configured", "APP_VERSION = '1.3.2'" in js and dataset.get("app_version") == "1.3.2")
+# Version 1.3.3 UX requirements.
+check("Version 1.3.3 is configured", "APP_VERSION = '1.3.3'" in js and dataset.get("app_version") == "1.3.3")
 check("Money bag favicon is configured", bool(soup.find("link", attrs={"rel": "icon", "href": "./assets/favicon.svg"})))
 check("Day/night theme toggle exists", soup.find(id="themeToggle") is not None and "toggleTheme" in js)
 check("Night theme CSS exists", 'html[data-theme="night"]' in css)
@@ -124,7 +124,7 @@ for key in ["state","review_status","status","transaction_test","nexus_sales_sco
 check("Source URL audit metadata is present", dataset.get("source_url_audit_date") == "2026-08-08" and dataset.get("source_url_audit_count") == 51)
 
 
-# Version 1.3.2 transaction-analysis and independently audited measurement-period requirements.
+# Version 1.3.3 transaction-analysis and independently audited measurement-period requirements.
 page_text = soup.get_text(" ", strip=True)
 check("State economic-nexus thresholds section exists", "State Economic-Nexus Thresholds" in page_text)
 check("Sales/Transaction early-warning section exists", "Sales/Transaction Economic-Nexus Early Warning" in page_text)
@@ -154,7 +154,7 @@ check("Below result status is import-limited and modeled", "Below modeled econom
 
 
 check("Schema v5 is loaded", dataset.get("schema_version") == 5)
-check("App version 1.3.2 is in dataset", dataset.get("app_version") == "1.3.2")
+check("App version 1.3.3 is in dataset", dataset.get("app_version") == "1.3.3")
 check("Rules/logic audit metadata is current", dataset.get("rules_logic_audit_date") == "2026-08-09" and dataset.get("measurement_period_audit_date") == "2026-08-09")
 check("Professional note distinguishes nexus screening from filing frequency", "sales-tax return filing-frequency engine" in page_text and "complete nexus/compliance determination" in page_text)
 check("State thresholds subtitle distinguishes screening from complete nexus/return timing", "does not determine complete nexus, return frequency, or due dates" in page_text)

@@ -2,7 +2,7 @@
 
 const DATA_URL = './data/state-nexus.json';
 const HISTORY_URL = './updates/update-history.json';
-const APP_VERSION = '1.3.2';
+const APP_VERSION = '1.3.3';
 const LS_WORKING = 'salesTaxNexusWorkingV5';
 const LS_PROPOSALS = 'salesTaxNexusProposalsV5';
 const LS_HISTORY = 'salesTaxNexusHistoryV5';
@@ -794,6 +794,7 @@ function exportXlsx(rows=visibleRows(),filenameSuffix='filtered'){
 
 function bindEvents(){
   document.getElementById('themeToggle').addEventListener('click',toggleTheme);
+  document.getElementById('professionalUseToggle').addEventListener('click',()=>document.getElementById('professionalUseDialog').showModal());
   document.getElementById('measurementMethodFilter').addEventListener('change',renderMeasurementReference);
   document.getElementById('measurementReferenceDate').addEventListener('change',renderMeasurementReference);
   document.getElementById('measurementSort').addEventListener('change',renderMeasurementReference);
