@@ -78,7 +78,7 @@ for(const [state,key,expected] of primaryOverrides){
 }
 
 if(doc.schema_version!==5) findings.push(`schema_version expected 5, got ${doc.schema_version}`);
-if(doc.app_version!=='1.3.1') findings.push(`app_version expected 1.3.1, got ${doc.app_version}`);
+if(doc.app_version!=='1.3.2') findings.push(`app_version expected 1.3.2, got ${doc.app_version}`);
 if(doc.rules_logic_audit_date!=='2026-08-09' || doc.measurement_period_audit_date!=='2026-08-09') findings.push('rules/measurement audit metadata not dated 2026-08-09');
 
 if(findings.length){console.error('Independent reconciliation findings:\n- '+findings.join('\n- '));process.exit(1);}

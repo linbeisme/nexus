@@ -39,7 +39,7 @@ for(const k of ['last_full_review','baseline_cross_check','audit_date','source_u
   if(doc[k] && !/^\d{4}-\d{2}-\d{2}$/.test(String(doc[k]))) errors.push(`${k} must be YYYY-MM-DD`);
 }
 if(doc.schema_version!==5) errors.push(`Expected schema_version 5, found ${doc.schema_version}`);
-if(doc.app_version!=='1.3.1') errors.push(`Expected app_version 1.3.1, found ${doc.app_version}`);
+if(doc.app_version!=='1.3.2') errors.push(`Expected app_version 1.3.2, found ${doc.app_version}`);
 if(doc.source_url_audit_count!==51) errors.push(`Expected source_url_audit_count 51, found ${doc.source_url_audit_count}`);
 
 if(!Array.isArray(doc.states)) errors.push('states must be an array');

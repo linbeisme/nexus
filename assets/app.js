@@ -2,7 +2,7 @@
 
 const DATA_URL = './data/state-nexus.json';
 const HISTORY_URL = './updates/update-history.json';
-const APP_VERSION = '1.3.1';
+const APP_VERSION = '1.3.2';
 const LS_WORKING = 'salesTaxNexusWorkingV5';
 const LS_PROPOSALS = 'salesTaxNexusProposalsV5';
 const LS_HISTORY = 'salesTaxNexusHistoryV5';
@@ -92,6 +92,9 @@ function computedValue(row,key){return key==='review_status' ? reviewStatus(row)
 function rowHasPublishedChange(row){return flagTrue(row.change_detected);}
 function proposalIsMaterial(p){return !!p?.material_change;}
 function stateHasMaterialAlert(state){const r=data.find(x=>x.state===state); return !!(proposalIsMaterial(proposalFor(state)) || (r && rowHasPublishedChange(r)));}
+function recentChangeCutoffBase(){return meta.last_full_review || todayISO();}
+function isRecentMaterialChange(row,days=365){const changed=row?.latest_change_date; const base=recentChangeCutoffBase(); const cd=dateValue(changed), bd=dateValue(base); if(!cd||!bd) return false; const diff=(bd.getTime()-cd.getTime())/86400000; return diff>=0 && diff<=days;}
+function recentChangeTitle(row){return isRecentMaterialChange(row)?`Recent material update/change dated ${row.latest_change_date}`:'';}
 function materialAlertStates(){return data.filter(r=>stateHasMaterialAlert(r.state)).map(r=>r.state);}
 
 async function loadJson(url){const res=await fetch(url,{cache:'no-store'}); if(!res.ok) throw new Error(`${url}: HTTP ${res.status}`); return res.json();}
@@ -272,12 +275,12 @@ function renderMeasurementReference(){
   const body=document.getElementById('measurementReferenceBody');if(!body)return;
   const method=document.getElementById('measurementMethodFilter')?.value||'all',sort=document.getElementById('measurementSort')?.value||'state',q=(document.getElementById('measurementSearch')?.value||'').trim().toLowerCase(),asOf=document.getElementById('measurementReferenceDate')?.value||todayISO();
   let rows=data.filter(r=>measurementFilterMatches(r,method));
-  if(q) rows=rows.filter(r=>[r.state,measurementMethodLabel(r),r.measurement_period,measurementDeterminationText(r),r.collection_timing,r.threshold,r.transaction_test].some(v=>String(v||'').toLowerCase().includes(q)));
+  if(q) rows=rows.filter(r=>[r.state,measurementMethodLabel(r),r.measurement_period,measurementDeterminationText(r),r.collection_timing,r.threshold,r.transaction_test,r.rule_effective_date,r.last_reviewed,r.latest_change_date].some(v=>String(v||'').toLowerCase().includes(q)));
   rows=[...rows].sort((a,b)=>sort==='method'?measurementMethodLabel(a).localeCompare(measurementMethodLabel(b))||a.state.localeCompare(b.state):a.state.localeCompare(b.state));
   body.innerHTML='';
-  rows.forEach(r=>{const tr=document.createElement('tr');const code=r.measurement_code||legacyMeasurementCode(r);tr.dataset.measurementCode=code;tr.innerHTML=`<td><strong>${esc(r.state)}</strong></td><td><span class="badge neutral">${esc(measurementMethodLabel(r))}</span><div class="small">${esc(code)}</div></td><td>${esc(r.measurement_period||'—')}</td><td>${esc(measurementDeterminationText(r))}</td><td>${esc(measurementExampleText(r,asOf))}</td><td>${esc(thresholdSummary(r))}</td><td>${esc(r.collection_timing||'—')}</td><td class="source"><a href="${esc(r.source_url)}" target="_blank" rel="noopener noreferrer">${esc(r.source_title||'Official source')}</a></td>`;body.appendChild(tr);});
-  const counts={};data.forEach(r=>{const label=measurementMethodLabel(r);counts[label]=(counts[label]||0)+1;});
-  const stats=document.getElementById('measurementStats');if(stats)stats.innerHTML=`<span class="chip">Showing ${rows.length} of ${data.length}</span><span class="chip">Calendar-year methods: ${data.filter(r=>['CY_OR_PRIOR_CY','PRIOR_CY'].includes(r.measurement_code)).length}</span><span class="chip">Rolling 12 months: ${data.filter(r=>r.measurement_code==='ROLLING_12_MONTHS').length}</span><span class="chip">Quarter-based: ${data.filter(r=>QUARTER_BASED_CODES.has(r.measurement_code)).length}</span><span class="chip">Special fixed/completed-month: ${data.filter(r=>['CT_SEP30_YEAR','PRIOR_12_COMPLETE_CAL_MONTHS'].includes(r.measurement_code)).length}</span>`;
+  rows.forEach(r=>{const tr=document.createElement('tr');const code=r.measurement_code||legacyMeasurementCode(r);const recent=isRecentMaterialChange(r);tr.dataset.measurementCode=code;tr.innerHTML=`<td><span class="measurement-state-name">${esc(r.state)}</span>${recent?`<span class="recent-gold-star" title="${esc(recentChangeTitle(r))}" aria-label="${esc(recentChangeTitle(r))}">★</span>`:''}</td><td><span class="badge neutral">${esc(measurementMethodLabel(r))}</span><div class="small">${esc(code)}</div></td><td>${esc(r.measurement_period||'—')}</td><td>${esc(measurementDeterminationText(r))}</td><td>${esc(measurementExampleText(r,asOf))}</td><td>${esc(thresholdSummary(r))}</td><td>${esc(r.rule_effective_date||'—')}</td><td>${esc(r.last_reviewed||'—')}</td><td>${esc(r.collection_timing||'—')}</td><td class="source"><a href="${esc(r.source_url)}" target="_blank" rel="noopener noreferrer">${esc(r.source_title||'Official source')}</a></td>`;body.appendChild(tr);});
+  const recentCount=data.filter(r=>isRecentMaterialChange(r)).length;
+  const stats=document.getElementById('measurementStats');if(stats)stats.innerHTML=`<span class="chip">Showing ${rows.length} of ${data.length}</span><span class="chip">Calendar-year methods: ${data.filter(r=>['CY_OR_PRIOR_CY','PRIOR_CY'].includes(r.measurement_code)).length}</span><span class="chip">Rolling 12 months: ${data.filter(r=>r.measurement_code==='ROLLING_12_MONTHS').length}</span><span class="chip">Quarter-based: ${data.filter(r=>QUARTER_BASED_CODES.has(r.measurement_code)).length}</span><span class="chip">Special fixed/completed-month: ${data.filter(r=>['CT_SEP30_YEAR','PRIOR_12_COMPLETE_CAL_MONTHS'].includes(r.measurement_code)).length}</span><span class="chip">★ Recent material update/change within 12 months: ${recentCount}</span>`;
 }
 function clearMeasurementFilters(){const m=document.getElementById('measurementMethodFilter'),s=document.getElementById('measurementSort'),q=document.getElementById('measurementSearch'),d=document.getElementById('measurementReferenceDate');if(m)m.value='all';if(s)s.value='state';if(q)q.value='';if(d)d.value=todayISO();renderMeasurementReference();}
 
@@ -498,7 +501,7 @@ function positionMultiFilterMenu(details,menu){
   const summary=details.querySelector('summary'); if(!summary) return;
   const r=summary.getBoundingClientRect();
   const key=details.dataset.key || '';
-  const preferred = key==='transaction_test' ? 430 : (key==='state' ? 330 : 390);
+  const preferred = key==='transaction_test' ? 390 : (key==='state' ? 300 : 360);
   const width=Math.min(preferred,Math.max(280,window.innerWidth-24));
   let left=Math.max(12,r.left);
   if(left+width>window.innerWidth-12) left=Math.max(12,window.innerWidth-width-12);
@@ -512,23 +515,36 @@ function buildMultiFilter(key){
   const summary=document.createElement('summary'); summary.textContent=multiSummary(key); details.appendChild(summary);
   const menu=document.createElement('div'); menu.className='multi-filter-menu';
   const search=document.createElement('input'); search.type='search'; search.placeholder='Find criteria…'; search.setAttribute('aria-label',`Search ${key} filter options`); menu.appendChild(search);
+  const toolbar=document.createElement('div'); toolbar.className='multi-filter-toolbar';
+  const selectVisible=document.createElement('button'); selectVisible.type='button'; selectVisible.textContent='Select visible';
+  const clearVisible=document.createElement('button'); clearVisible.type='button'; clearVisible.textContent='Clear visible';
+  const count=document.createElement('span'); count.className='count';
+  toolbar.append(selectVisible,clearVisible,count); menu.appendChild(toolbar);
   const opts=document.createElement('div'); opts.className='multi-filter-options';
   filterOptions(key).forEach(value=>{
     const label=document.createElement('label'); label.className='multi-option'; label.dataset.search=value.toLowerCase();
     const cb=document.createElement('input'); cb.type='checkbox'; cb.value=value; cb.checked=(filters[key]||[]).includes(value);
     cb.addEventListener('change',()=>{
-      const s=new Set(filters[key]||[]); if(cb.checked)s.add(value); else s.delete(value); filters[key]=[...s]; summary.textContent=multiSummary(key); render();
+      const s=new Set(filters[key]||[]); if(cb.checked)s.add(value); else s.delete(value); filters[key]=[...s]; summary.textContent=multiSummary(key); updateVisibleCount(); render();
     });
     const span=document.createElement('span'); span.textContent=value; label.append(cb,span); opts.appendChild(label);
   });
   menu.appendChild(opts);
+  const visibleCheckboxes=()=>[...opts.querySelectorAll('.multi-option:not(.hidden) input[type="checkbox"]')];
+  const updateVisibleCount=()=>{const visible=visibleCheckboxes(); const checked=visible.filter(x=>x.checked).length; count.textContent=`${checked}/${visible.length} visible selected`;};
+  const applySelection=(checked)=>{const set=new Set(filters[key]||[]); visibleCheckboxes().forEach(cb=>{cb.checked=checked; if(checked)set.add(cb.value); else set.delete(cb.value);}); filters[key]=[...set]; summary.textContent=multiSummary(key); updateVisibleCount(); render();};
+  selectVisible.addEventListener('click',()=>applySelection(true));
+  clearVisible.addEventListener('click',()=>applySelection(false));
   const actions=document.createElement('div'); actions.className='multi-filter-actions';
-  const clear=document.createElement('button'); clear.type='button'; clear.textContent='Clear'; clear.addEventListener('click',()=>{filters[key]=[]; opts.querySelectorAll('input[type="checkbox"]').forEach(x=>x.checked=false); summary.textContent='All'; render();}); actions.appendChild(clear); menu.appendChild(actions);
-  search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase(); opts.querySelectorAll('.multi-option').forEach(el=>el.classList.toggle('hidden',!!q&&!el.dataset.search.includes(q)));});
+  const clear=document.createElement('button'); clear.type='button'; clear.textContent='Clear all'; clear.addEventListener('click',()=>{filters[key]=[]; opts.querySelectorAll('input[type="checkbox"]').forEach(x=>x.checked=false); summary.textContent='All'; updateVisibleCount(); render();});
+  const close=document.createElement('button'); close.type='button'; close.textContent='Close'; close.addEventListener('click',()=>details.removeAttribute('open'));
+  actions.append(clear,close); menu.appendChild(actions);
+  search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase(); opts.querySelectorAll('.multi-option').forEach(el=>el.classList.toggle('hidden',!!q&&!el.dataset.search.includes(q))); updateVisibleCount();});
   details.addEventListener('toggle',()=>{
     if(details.open){
       document.querySelectorAll('.multi-filter[open]').forEach(other=>{if(other!==details)other.removeAttribute('open');});
       requestAnimationFrame(()=>positionMultiFilterMenu(details,menu));
+      updateVisibleCount();
       search.focus({preventScroll:true});
     }
   });
@@ -672,9 +688,26 @@ function renderStatePicker(){
 function buildUpdatePrompt(){
   const scope=researchRows(); const out=document.getElementById('updatePrompt');
   if(!scope.length){out.value='Select at least one state (up to 10), or choose Visible / filtered rows or All jurisdictions.'; return;}
-  const compact=scope.map(r=>({state:r.state,status:r.status,current_threshold:r.threshold,dollar_threshold_amount:r.dollar_threshold_amount,dollar_threshold_operator:r.dollar_threshold_operator,dollar_review_floor:r.dollar_review_floor,transaction_test:r.transaction_test,transaction_threshold_count:r.transaction_threshold_count,transaction_threshold_operator:r.transaction_threshold_operator,threshold_logic:r.threshold_logic,transaction_scope:r.transaction_scope,measurement_period:r.measurement_period,measurement_code:r.measurement_code,nexus_sales_scope:r.nexus_sales_scope,sales_basis:r.sales_basis,collection_timing:r.collection_timing,marketplace_note:r.marketplace_note,latest_material_change:r.latest_change_date,last_reviewed:r.last_reviewed,primary_source:r.source_url}));
+  const compact=scope.map(r=>({state:r.state,status:r.status,current_threshold:r.threshold,dollar_threshold_amount:r.dollar_threshold_amount,dollar_threshold_operator:r.dollar_threshold_operator,dollar_review_floor:r.dollar_review_floor,transaction_test:r.transaction_test,transaction_threshold_count:r.transaction_threshold_count,transaction_threshold_operator:r.transaction_threshold_operator,threshold_logic:r.threshold_logic,transaction_scope:r.transaction_scope,measurement_period:r.measurement_period,measurement_code:r.measurement_code,nexus_sales_scope:r.nexus_sales_scope,sales_basis:r.sales_basis,collection_timing:r.collection_timing,marketplace_note:r.marketplace_note,rule_effective_date:r.rule_effective_date,latest_change_date:r.latest_change_date,last_reviewed:r.last_reviewed,primary_source:r.source_url}));
   const secondaries=(meta.secondary_sources||[]).map(s=>s.url).join(' and ');
-  out.value=`Act as a senior U.S. state-and-local-tax researcher supporting a CPA. Check for changes to remote-seller sales/use tax economic nexus and seller collection/remittance requirements since the later of each jurisdiction's latest_material_change or last_reviewed date.\n\nRESEARCH STANDARD\n- Use primary authority first: enacted statutes/bills, regulations, official revenue-department notices, FAQs, and tax-agency pages.\n- Verify the dollar threshold and exact > / >= boundary, transaction-count threshold and exact boundary, AND/OR logic, legal transaction-count scope, measurement period and review cadence, nexus threshold sales scope (gross/all vs retail-only vs taxable-only), which sales count, registration/collection timing, marketplace-facilitator interaction, and any enacted future change.\n- Distinguish a rule's effective date from the date an agency webpage was reviewed or updated.\n- Validate that each proposed source_url resolves to a current official state or state-authorized source.\n- Set change_detected=true ONLY when a material collection, filing, threshold, sales-base, timing, or marketplace requirement changed since the stored record. Include a short change_note. Otherwise set change_detected=false.\n- If there is no material change, preserve the existing rule text and set last_reviewed to today's date.\n\nOUTPUT\nReturn ONLY a JSON array, one object per jurisdiction reviewed. Use keys: state, status, threshold, dollar_threshold_amount, dollar_threshold_operator, dollar_review_floor, transaction_test, transaction_threshold_count, transaction_threshold_operator, threshold_logic, transaction_scope, measurement_period, measurement_code, nexus_sales_scope, sales_basis, collection_timing, marketplace_note, rule_effective_date, latest_change_date, last_reviewed, source_title, source_url, notes, change_detected, change_note. measurement_code must be one of CY_OR_PRIOR_CY, PRIOR_CY, ROLLING_12_MONTHS, QUARTER_END_TRAILING_12, PRIOR_12_COMPLETE_CAL_MONTHS, NY_FOUR_SALES_TAX_QUARTERS, CT_SEP30_YEAR, or NA. Use null for a nonexistent numeric transaction threshold. Existing wording may be preserved when verified and unchanged.\n\nCURRENT RECORDS\n${JSON.stringify(compact,null,2)}\n\nSecondary cross-checks only: ${secondaries}.`;
+  out.value=`Act as a senior U.S. state-and-local-tax researcher supporting a CPA. Check for changes to remote-seller sales/use tax economic nexus and seller collection/remittance requirements since the later of each jurisdiction's latest_change_date or last_reviewed date.
+
+RESEARCH STANDARD
+- Use primary authority first: enacted statutes/bills, regulations, official revenue-department notices, FAQs, and tax-agency pages.
+- Verify and refresh, where applicable, the dollar threshold and exact > / >= boundary, transaction-count threshold and exact boundary, AND/OR logic, legal transaction-count scope, measurement period text, measurement_code, nexus threshold sales scope (gross/all vs retail-only vs taxable-only), which sales count, registration/collection timing, marketplace-facilitator interaction, and any enacted future change.
+- Distinguish a rule's effective date from the date an agency webpage was reviewed or updated. Record the legal rule_effective_date and latest_change_date separately.
+- Validate that each proposed source_url resolves to a current official state or state-authorized source.
+- IMPORTANT: when a material rule changes, update every dependent field so all affected sections remain synchronized. That includes Section 1 thresholds/notes, Section 2 measurement-period explanations, and Section 3 transaction-analysis inputs. If one field changes, also update any related threshold text, measurement_period, measurement_code, transaction_test, threshold_logic, sales scope/basis, collection_timing, marketplace_note, and date fields that are affected.
+- Set change_detected=true ONLY when a material collection, filing, threshold, sales-base, timing, or marketplace requirement changed since the stored record. Include a short change_note. Otherwise set change_detected=false.
+- If there is no material change, preserve the existing rule text and set last_reviewed to today's date.
+
+OUTPUT
+Return ONLY a JSON array, one object per jurisdiction reviewed. Use keys: state, status, threshold, dollar_threshold_amount, dollar_threshold_operator, dollar_review_floor, transaction_test, transaction_threshold_count, transaction_threshold_operator, threshold_logic, transaction_scope, measurement_period, measurement_code, nexus_sales_scope, sales_basis, collection_timing, marketplace_note, rule_effective_date, latest_change_date, last_reviewed, source_title, source_url, notes, change_detected, change_note. measurement_code must be one of CY_OR_PRIOR_CY, PRIOR_CY, ROLLING_12_MONTHS, QUARTER_END_TRAILING_12, PRIOR_12_COMPLETE_CAL_MONTHS, NY_FOUR_SALES_TAX_QUARTERS, CT_SEP30_YEAR, or NA. Use null for a nonexistent numeric transaction threshold. Existing wording may be preserved when verified and unchanged.
+
+CURRENT RECORDS
+${JSON.stringify(compact,null,2)}
+
+Secondary cross-checks only: ${secondaries}.`;
 }
 function openSearches(){
   const rows=researchRows().slice(0,10); if(!rows.length){alert('Select at least one state or choose another research scope first.');return;}

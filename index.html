@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="CPA research app for state remote-seller sales tax economic nexus collection, filing, and transaction threshold review.">
   <meta name="theme-color" id="themeColor" content="#f5f7fb">
-  <title>State Sales Tax Nexus Requirements</title>
+  <title>State Sales Tax Nexus Requirements v1.3.2</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <script>
     (() => {
@@ -22,7 +22,7 @@
 <main class="wrap">
   <header class="page-header">
     <div>
-      <div class="eyebrow">CPA RESEARCH WORKPAPER <span class="version-badge">v1.3.1</span></div>
+      <div class="eyebrow">CPA RESEARCH WORKPAPER <span class="version-badge">v1.3.2</span></div>
       <h1>State Seller Sales Tax Collection &amp; Remittance Requirements</h1>
       <p class="subtitle">Economic-nexus <strong>early-warning and watchlist</strong> tool for remote sellers. It identifies states where imported sales activity is approaching, meeting, or may previously have met modeled sales/use-tax economic-nexus thresholds. It does not determine complete nexus or prescribe how to register, file, or remit.</p>
     </div>
@@ -147,7 +147,7 @@
     <div class="analysis-table-wrap measurement-reference-wrap">
       <table id="measurementReferenceTable" class="analysis-table measurement-reference-table">
         <thead><tr>
-          <th>State</th><th>Measurement method</th><th>Stored rule</th><th>How the period is determined</th><th>Example / modeled period</th><th>Threshold test</th><th>Collection / registration / remittance timing</th><th>Primary source</th>
+          <th>State</th><th>Measurement method</th><th>Stored rule</th><th>How the period is determined</th><th>Example / modeled period</th><th>Threshold test</th><th>Rule effective date</th><th>App last updated</th><th>Collection / registration / remittance timing</th><th>Primary source</th>
         </tr></thead>
         <tbody id="measurementReferenceBody"></tbody>
       </table>
@@ -277,6 +277,7 @@
           <button id="openSearch">Open official-source searches</button>
         </div>
         <textarea id="updatePrompt" placeholder="Build a source-first update prompt for the selected states."></textarea>
+        <div class="small prompt-note"><strong>Prompt coverage validation:</strong> the generated prompt now instructs the researcher to update every dependent field that drives Sections 1, 2, and 3 — including thresholds, transaction tests, measurement period/code, effective dates, latest material change dates, last app review date, sales scope/basis, collection timing, and marketplace notes.</div>
       </div>
 
       <label for="jsonPatch">Stage proposed changes</label>
