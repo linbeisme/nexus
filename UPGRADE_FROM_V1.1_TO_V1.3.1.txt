@@ -1,0 +1,33 @@
+STATE SALES TAX NEXUS APP
+DIRECT UPGRADE: v1.1 -> v1.3.1
+
+Purpose
+-------
+This package contains only the files needed to replace/add in an existing v1.1 repository to obtain the current v1.3.1 application behavior and deployment quality gates.
+
+Install
+-------
+1. Back up or create a Git branch from the current v1.1 repository.
+2. Unzip this package.
+3. Upload/copy the CONTENTS of this package into the repository root, preserving all folders.
+4. Allow matching files to be replaced.
+5. Do not delete unrelated repository files. No deletion is required by this upgrade package.
+6. Commit the changes and allow the GitHub Pages deployment workflow to run.
+7. Hard-refresh the deployed site.
+
+Expected result
+---------------
+- App version: v1.3.1
+- Dataset schema: v5
+- Four work areas, including Measurement Period Determination and Sales/Transaction Economic-Nexus Early Warning
+- User-facing low-risk status: "Below modeled economic-nexus threshold — based on imported data"
+- Explicit warning that a below result is not an all-clear for other nexus bases or omitted facts
+- v1.3.0 audited measurement/rules logic retained, including the North Carolina 2026-07-02 timing correction
+
+Required deployment checks
+--------------------------
+The included deploy workflow runs dataset validation, independent rules reconciliation, JavaScript syntax, transaction-analysis smoke, measurement-reference smoke, static UI audit, and XLSX export smoke.
+
+Files intentionally NOT included
+--------------------------------
+Historical changelogs, audit reports, manuals, README files, unchanged favicon, unchanged monthly review workflow, and the pre-existing export smoke test are not required to perform the v1.1 -> v1.3.1 application upgrade.

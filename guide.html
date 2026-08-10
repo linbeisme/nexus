@@ -3,211 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Beginner Setup & Update Guide | State Sales Tax Nexus App</title>
+<title>Beginner Setup & Update Guide | Nexus App v1.3.1</title>
 <style>
-:root{--ink:#18212f;--muted:#5b6675;--line:#d9e0e8;--soft:#f6f8fb;--accent:#2457a7;--accent2:#0f766e;--warn:#9a6700;--danger:#a61b1b;--good:#1f7a45;--white:#fff}
-*{box-sizing:border-box} body{margin:0;background:#eef2f6;color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-a{color:#174ea6} code{background:#eef2f7;padding:.1rem .3rem;border-radius:4px}.wrap{max-width:1180px;margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 0 30px rgba(20,30,45,.08)}
-.hero{padding:42px 48px 28px;background:linear-gradient(135deg,#f8fbff,#eef5ff);border-bottom:1px solid var(--line)}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--accent)}h1{font-size:38px;line-height:1.12;margin:.35rem 0 .7rem}h2{font-size:28px;margin:38px 0 14px}h3{font-size:21px;margin:26px 0 10px}p{margin:.45rem 0 1rem}.lede{font-size:18px;color:#3d4b5e;max-width:900px}.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{display:inline-block;padding:9px 13px;border:1px solid #b7c5d8;border-radius:8px;background:white;text-decoration:none;font-weight:700}.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-main{padding:0 48px 60px}.callout{border-left:5px solid var(--accent);padding:14px 18px;background:#f4f8ff;margin:18px 0;border-radius:0 8px 8px 0}.callout.warn{border-left-color:var(--warn);background:#fff9e8}.callout.good{border-left-color:var(--good);background:#f0fbf5}.callout.danger{border-left-color:var(--danger);background:#fff4f4}
-.flow{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin:18px 0}.flow .box{flex:1 1 150px;min-width:135px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--soft);font-weight:700;text-align:center}.flow .arrow{align-self:center;font-size:25px;color:#7c8797}.step{display:grid;grid-template-columns:46px 1fr;gap:14px;margin:18px 0;padding-bottom:18px;border-bottom:1px solid #edf0f4}.num{width:38px;height:38px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:800}.step h3{margin:2px 0 6px}.check{padding-left:1.15rem}.check li{margin:.35rem 0}.what{background:#f8fafc;border:1px dashed #aab5c3;border-radius:8px;padding:10px 12px;margin:10px 0;color:#465365}
-.mock{border:1px solid #cfd8e3;border-radius:12px;overflow:hidden;margin:14px 0;background:#fff}.mock .top{background:#111827;color:#fff;padding:9px 13px;font-weight:700}.mock .tabs{display:flex;gap:18px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:14px}.mock .tabs b{border-bottom:3px solid #f97316;padding-bottom:8px}.mock .body{padding:18px}.select{display:inline-block;border:1px solid #aeb8c5;border-radius:6px;padding:8px 34px 8px 10px;background:#fff;min-width:220px}.path{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#101827;color:#e5edf7;border-radius:10px;padding:16px;overflow:auto}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.chart{border:1px solid var(--line);border-radius:12px;padding:16px}.barrow{display:grid;grid-template-columns:190px 1fr 40px;gap:10px;align-items:center;margin:9px 0}.bar{height:18px;background:#e5eaf1;border-radius:99px;overflow:hidden}.fill{height:100%;background:#4b78bd;border-radius:99px}.fill.alt{background:#2f8a7b}.fill.gray{background:#8793a2}.small{font-size:13px;color:var(--muted)}
-.shot{border:1px solid #cfd8e3;border-radius:12px;padding:8px;background:#f8fafc;margin:16px 0}.shot img{display:block;max-width:100%;height:auto;border-radius:7px}.caption{font-size:14px;color:#596577;margin:8px 4px 2px}.table{width:100%;border-collapse:collapse;margin:14px 0}.table th,.table td{border:1px solid var(--line);padding:9px;vertical-align:top;text-align:left}.table th{background:#f2f5f9}.codebox{background:#101827;color:#dbe7f5;border-radius:10px;padding:15px;overflow:auto;font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}.pill{display:inline-block;border-radius:999px;padding:3px 9px;background:#e8f0ff;color:#174ea6;font-size:12px;font-weight:800}.footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:#667386}
-@media(max-width:760px){.hero,main{padding-left:20px;padding-right:20px}h1{font-size:31px}.grid2{grid-template-columns:1fr}.barrow{grid-template-columns:145px 1fr 32px}.flow .arrow{display:none}}
-@media print{body{background:#fff}.wrap{box-shadow:none}.nav{display:none}.step{break-inside:avoid}.shot{break-inside:avoid}}
+:root{--ink:#172033;--muted:#5f6d80;--line:#d5deea;--soft:#f5f8fc;--navy:#0b2d5c;--blue:#2457a7;--green:#136a3a;--yellow:#fff5bf;--purple:#efe3ff;--danger:#b83232;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:#eef3f8;color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.wrap{max-width:1180px;margin:auto;background:#fff;min-height:100vh;box-shadow:0 0 30px rgba(0,0,0,.08)}header{padding:40px 46px 28px;background:linear-gradient(135deg,#f7faff,#edf4ff);border-bottom:1px solid var(--line)}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--blue)}h1{font-size:38px;line-height:1.12;margin:.35rem 0 .5rem}h2{font-size:27px;margin:34px 0 12px}h3{font-size:20px;margin:24px 0 8px}p{margin:.45rem 0 1rem}.lede{font-size:18px;color:#44546a;max-width:900px}.nav{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.btn{display:inline-block;padding:9px 13px;border:1px solid #b7c6d9;border-radius:8px;background:#fff;color:#173d76;text-decoration:none;font-weight:800}.btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}main{padding:0 46px 58px}.callout{padding:13px 16px;border-left:5px solid var(--blue);background:#f2f7ff;border-radius:0 8px 8px 0;margin:16px 0}.callout.warn{border-left-color:#bd7d00;background:#fff9e8}.callout.good{border-left-color:var(--green);background:#eefaf3}.step{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid #edf1f5}.num{width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}.step h3{margin:2px 0 6px}.flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin:18px 0}.flow .box{flex:1 1 150px;min-width:140px;border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:13px;text-align:center;font-weight:800}.flow .arrow{align-self:center;font-size:24px;color:#7a8798}.table{width:100%;border-collapse:collapse;margin:13px 0}.table th,.table td{border:1px solid var(--line);padding:9px;vertical-align:top;text-align:left}.table th{background:#edf3f9}.code{background:#111827;color:#e7eef8;border-radius:10px;padding:15px;white-space:pre-wrap;overflow:auto;font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace}.mini-ui{border:1px solid var(--line);border-radius:12px;padding:15px;background:#fbfcfe;margin:15px 0}.row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.chip{padding:6px 10px;border-radius:999px;background:#edf2f7;border:1px solid #d5dee9;font-size:13px}.control{padding:7px 10px;border-radius:7px;border:1px solid #cbb2f4;background:var(--purple);font-weight:800}.control.navy{background:var(--navy);border-color:var(--navy);color:#fff}.control.green{background:var(--green);border-color:var(--green);color:#fff}.input{padding:8px 10px;border:1px solid #b9c7da;border-radius:7px;background:var(--yellow);min-width:220px}.footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}code{background:#eef2f6;padding:.1rem .3rem;border-radius:4px}@media(max-width:760px){header,main{padding-left:20px;padding-right:20px}h1{font-size:31px}.flow .arrow{display:none}}
 </style>
 </head>
 <body><div class="wrap">
-<header class="hero">
-  <div class="eyebrow">BEGINNER IMPLEMENTATION MANUAL · APP v1.1</div>
-  <h1>GitHub Setup & Tax-Data Update Guide</h1>
-  <p class="lede">A click-by-click guide for publishing the State Seller Sales Tax Collection & Remittance Requirements app on GitHub Pages, maintaining the 51-jurisdiction dataset, reviewing proposed tax changes, and publishing only approved updates.</p>
-  <div class="nav"><a class="btn primary" href="./index.html">Open the nexus app</a><a class="btn" href="#setup">GitHub setup</a><a class="btn" href="#update">Update workflow</a><a class="btn" href="#examples">Worked examples</a><a class="btn" href="#troubleshooting">Troubleshooting</a></div>
+<header>
+<div class="eyebrow">BEGINNER IMPLEMENTATION & USER MANUAL - APP v1.3.1</div>
+<h1>GitHub Setup, Daily Use & Tax-Data Update Guide</h1>
+<p class="lede">A browser-first manual for publishing the Nexus app on GitHub Pages, using the audited v1.3.1 interface, researching up to 10 states at a time, reviewing proposed tax changes, and publishing only approved data.</p>
+<div class="nav"><a class="btn primary" href="./index.html">Open Nexus app</a><a class="btn" href="#setup">GitHub setup</a><a class="btn" href="#use">Daily use</a><a class="btn" href="#update">Update workflow</a><a class="btn" href="#trouble">Troubleshooting</a></div>
 </header>
 <main>
-<div class="callout good"><strong>Version 1.1:</strong> adds Day/Night mode, multi-select column filters, up-to-10-state research batches, dual top/bottom table scrollbars, source-link audit metadata, and a flashing material-change alert with a red star beside affected jurisdictions.</div>
-<section>
-<h2>1. What you are publishing</h2>
-<p>This project is a static web application. The browser reads <code>data/state-nexus.json</code>, renders the table, and lets you research, stage, review, and export changes. GitHub Pages hosts the public website; GitHub Actions validates and deploys it.</p>
-<div class="flow" aria-label="Architecture illustration"><div class="box">state-nexus.json<br><span class="small">tax data</span></div><div class="arrow">→</div><div class="box">index.html + app.js<br><span class="small">browser app</span></div><div class="arrow">→</div><div class="box">GitHub Actions<br><span class="small">validate + deploy</span></div><div class="arrow">→</div><div class="box">GitHub Pages<br><span class="small">live website</span></div></div>
-<div class="path">state-sales-tax-nexus/
-├── index.html
-├── guide.html
-├── assets/
-│   ├── app.js
-│   ├── styles.css
-│   └── guide/            ← screenshots used in this manual
-├── data/
-│   └── state-nexus.json  ← authoritative working dataset
-├── updates/
-│   └── update-history.json
-├── scripts/              ← validation and audit scripts
-├── tests/                ← UI and Excel smoke tests
-└── .github/workflows/
-    ├── deploy.yml
-    └── nexus-review.yml</div>
-<div class="callout warn"><strong>Important:</strong> browser-approved changes are a local working copy until you download the revised JSON files and commit them to GitHub. This is intentional: research does not become published tax guidance without a human review/publish step.</div>
-</section>
+<div class="callout good"><strong>Independent rules/measurement audit synchronized 2026-08-09.</strong> This guide reflects the current v1.3.1 layout: four work areas, including the new Measurement Period Determination table with method filters/date-driven examples, plus three-line header metadata, multi-select filters, collapsed research selector, Day/Night mode, synchronized table scrollbars, Excel export, and material-change alerts.</div>
 
 <section>
-<h2>Current dataset snapshot</h2>
-<div class="grid2">
-<div class="chart"><h3 style="margin-top:0">Economic-nexus test structure</h3>
-<div class="barrow"><span>Dollar threshold only</span><div class="bar"><div class="fill" style="width:58.8%"></div></div><strong>30</strong></div>
-<div class="barrow"><span>Transaction prong remains</span><div class="bar"><div class="fill alt" style="width:33.3%"></div></div><strong>17</strong></div>
-<div class="barrow"><span>No statewide general tax</span><div class="bar"><div class="fill gray" style="width:7.8%"></div></div><strong>4</strong></div>
-<p class="small">Counts from the audited 51-jurisdiction dataset included with this project.</p></div>
-<div class="chart"><h3 style="margin-top:0">Nexus threshold sales scope</h3>
-<div class="barrow"><span>All / gross</span><div class="bar"><div class="fill" style="width:56.9%"></div></div><strong>29</strong></div>
-<div class="barrow"><span>Retail only</span><div class="bar"><div class="fill alt" style="width:23.5%"></div></div><strong>12</strong></div>
-<div class="barrow"><span>Taxable only</span><div class="bar"><div class="fill gray" style="width:11.8%"></div></div><strong>6</strong></div>
-<div class="barrow"><span>No statewide tax</span><div class="bar"><div class="fill gray" style="width:7.8%"></div></div><strong>4</strong></div></div>
-</div>
+<h2>1. What the application does</h2>
+<div class="flow"><div class="box">51-jurisdiction JSON<br><small>published tax workpaper</small></div><div class="arrow">-></div><div class="box">Browser app<br><small>filter, research, stage</small></div><div class="arrow">-></div><div class="box">Human review<br><small>approve/reject</small></div><div class="arrow">-></div><div class="box">GitHub commit<br><small>validated deployment</small></div></div>
+<p>The website is static. Browser edits are temporary until replacement JSON files are committed to GitHub. The app does not continuously crawl tax-agency websites.</p>
 </section>
 
 <section id="setup">
-<h2>2. GitHub setup — beginner route</h2>
-<div class="callout good"><strong>Recommended beginner method:</strong> use GitHub Desktop for the first upload. It avoids command-line Git and reliably preserves the hidden <code>.github</code> workflow folder.</div>
-
-<div class="step"><div class="num">1</div><div><h3>Unzip the project</h3><p>Extract the package to a normal working folder, such as <code>Documents/state-sales-tax-nexus-package</code>. Inside it you should see the <code>sales-tax-nexus-github</code> folder and the file tree shown above.</p><div class="what"><strong>Checkpoint:</strong> verify that <code>index.html</code>, <code>data/state-nexus.json</code>, and <code>.github/workflows/deploy.yml</code> exist before continuing.</div></div></div>
-
-<div class="step"><div class="num">2</div><div><h3>Install and sign in to GitHub Desktop</h3><p>Install GitHub Desktop and authenticate it to the GitHub account or organization that will own the site. GitHub's current beginner documentation explains that Desktop provides a graphical interface for repository creation, commits, branches, and publishing.</p><p><a href="https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop" target="_blank" rel="noopener">Official GitHub Desktop setup documentation</a></p></div></div>
-
-<div class="step"><div class="num">3</div><div><h3>Create an empty local repository</h3><p>In GitHub Desktop choose <strong>File → New repository</strong>. A clear repository name is <code>state-sales-tax-nexus</code>. Choose a local folder you can find easily. Do not add a special framework; this is a static site.</p><div class="mock"><div class="top">GitHub Desktop — New repository</div><div class="body"><strong>Name:</strong> state-sales-tax-nexus<br><strong>Local path:</strong> Documents/GitHub<br><strong>Git ignore:</strong> None<br><strong>License:</strong> None</div></div></div></div>
-
-<div class="step"><div class="num">4</div><div><h3>Copy the app files into that repository</h3><p>Open the new repository folder on your computer. Copy the <em>contents</em> of <code>sales-tax-nexus-github</code> into the repository root. The repository root should contain <code>index.html</code> directly—not another nested <code>sales-tax-nexus-github</code> folder.</p><div class="callout danger"><strong>Common beginner error:</strong> if your path becomes <code>state-sales-tax-nexus/sales-tax-nexus-github/index.html</code>, the project is nested one level too deep. Move the inner files up one level.</div></div></div>
-
-<div class="step"><div class="num">5</div><div><h3>Commit the initial version</h3><p>Return to GitHub Desktop. You should see the project files listed under <strong>Changes</strong>. In the Summary box enter <code>Initial CPA nexus app</code>, then click <strong>Commit to main</strong>.</p><div class="what"><strong>Checkpoint:</strong> after the commit, the Changes list should be empty.</div></div></div>
-
-<div class="step"><div class="num">6</div><div><h3>Publish the repository to GitHub</h3><p>Click <strong>Publish repository</strong>. Choose your GitHub account/organization. If the website will be public, publish as a public repository. If using a private repository, confirm that your GitHub plan and Pages settings support the visibility you need.</p><p><a href="https://docs.github.com/en/desktop/adding-and-cloning-repositories/adding-an-existing-project-to-github-using-github-desktop" target="_blank" rel="noopener">Official publish-repository steps</a></p></div></div>
-
-<div class="step"><div class="num">7</div><div><h3>Turn on GitHub Pages with GitHub Actions</h3><p>Open the repository on GitHub.com. Click <strong>Settings</strong>. In the left sidebar under <strong>Code and automation</strong>, click <strong>Pages</strong>. Under <strong>Build and deployment → Source</strong>, choose <strong>GitHub Actions</strong>.</p><div class="mock"><div class="top">GitHub repository</div><div class="tabs"><span>Code</span><span>Issues</span><span>Pull requests</span><span>Actions</span><b>Settings</b></div><div class="body"><strong>Settings → Pages</strong><br><br>Build and deployment<br><span class="select">Source: GitHub Actions ▾</span></div></div><p>GitHub's current documentation uses the same Settings → Pages → GitHub Actions path. The included workflow checks out the repository, validates the dataset, builds the static artifact, and deploys it.</p><p><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener">Official GitHub Pages publishing-source documentation</a></p></div></div>
-
-<div class="step"><div class="num">8</div><div><h3>Watch the first deployment</h3><p>Click the repository's <strong>Actions</strong> tab. Open the newest <strong>Deploy GitHub Pages</strong> run. The important checks are:</p><ul class="check"><li>Validate nexus dataset</li><li>Reconcile audited benchmark fields</li><li>Syntax-check application JavaScript</li><li>Upload Pages artifact</li><li>Deploy to GitHub Pages</li></ul><p>When the workflow is green, GitHub exposes the Pages URL. A normal project site is typically <code>https://YOUR-USERNAME.github.io/state-sales-tax-nexus/</code>.</p></div></div>
-
-<div class="step"><div class="num">9</div><div><h3>Perform the first live-site acceptance test</h3><ol class="check"><li>Confirm the page shows <strong>51 jurisdictions</strong>.</li><li>Search for <strong>Illinois</strong>.</li><li>Turn on <strong>Sales $ threshold only</strong> and confirm the result count changes.</li><li>Clear filters.</li><li>Filter the <strong>Nexus threshold sales scope</strong> column for <code>Retail</code>.</li><li>Click a state source link and confirm it opens official authority.</li><li>Click <strong>Export all states to Excel</strong> and open the workbook.</li><li>Open <strong>guide.html</strong> from the live site and save it as your operating manual bookmark.</li></ol></div></div>
-
-<h3>Web-browser-only fallback</h3><p>If you do not want GitHub Desktop, GitHub also supports creating a repository and uploading files from the web interface. For this project, carefully verify that the hidden <code>.github</code> folder and <code>.nojekyll</code> file made it into the repository; missing workflow files are a common reason Pages does not deploy.</p><p><a href="https://docs.github.com/en/get-started/start-your-journey/uploading-a-project-to-github" target="_blank" rel="noopener">GitHub's browser upload tutorial</a></p>
+<h2>2. GitHub setup using only a browser</h2>
+<div class="step"><div class="num">1</div><div><h3>Upload the project at repository root</h3><p>Open the GitHub repository, choose <strong>Add file -> Upload files</strong>, and upload the project contents. Keep <code>index.html</code> at the repository root.</p><div class="code">nexus/
+├── .github/workflows/deploy.yml
+├── .github/workflows/nexus-review.yml
+├── assets/
+├── data/state-nexus.json
+├── updates/update-history.json
+├── index.html
+└── guide.html</div></div></div>
+<div class="step"><div class="num">2</div><div><h3>Confirm workflow location</h3><p>GitHub Actions workflow files must be inside <code>.github/workflows/</code>. Do not leave working copies of <code>deploy.yml</code> at repository root.</p></div></div>
+<div class="step"><div class="num">3</div><div><h3>Enable GitHub Pages</h3><p>Open <strong>Settings -> Pages</strong> and select <strong>GitHub Actions</strong> as the publishing source.</p></div></div>
+<div class="step"><div class="num">4</div><div><h3>Commit and watch deployment</h3><p>A commit to <code>main</code> automatically starts <strong>Deploy GitHub Pages</strong>. Open <strong>Actions</strong> and wait for both <strong>build</strong> and <strong>deploy</strong> to turn green.</p></div></div>
+<div class="step"><div class="num">5</div><div><h3>Acceptance test</h3><p>Open the live Pages URL and verify the controls described below. On a Mac use <strong>Command + Shift + R</strong> if an older version is cached.</p></div></div>
 </section>
 
-<section>
-<h2>3. What the loaded application should look like</h2>
-<div class="shot"><img src="./assets/guide/01-default-loaded-table.png" alt="Default loaded state nexus table"><div class="caption"><strong>Default view:</strong> all 51 jurisdictions, global search, column filters, review status, update controls, and Excel exports.</div></div>
-<div class="shot"><img src="./assets/guide/02-sales-scope-columns.png" alt="Sales scope columns"><div class="caption"><strong>Sales-scope view:</strong> the nexus threshold sales scope and detailed sales-basis columns distinguish gross/all, retail-only, and taxable-only tests.</div></div>
-<div class="shot"><img src="./assets/guide/03-dollar-threshold-only.png" alt="Dollar threshold only filter"><div class="caption"><strong>Dollar-only toggle:</strong> one click isolates jurisdictions with a monetary threshold and no current transaction-count prong.</div></div>
+<section id="use">
+<h2>3. Daily use of the v1.3.1 interface</h2>
+<h3>Header</h3>
+<div class="mini-ui"><div><strong>Version 1.3.1 - Published baseline</strong></div><div><strong>Independent audit</strong></div><div><strong>Source links</strong></div><div class="row"><span class="control">Night / Day</span></div></div>
+<p>The publication metadata is intentionally split into three lines. If a material change is staged or carried as unresolved, a flashing red siren appears in this area and affected state names receive a red star.</p>
+
+<h3>Measurement Period Determination</h3>
+<p>Use the new Section 2 to filter all 51 jurisdictions by measurement method, including current/prior calendar year, prior calendar year, rolling 12 months, quarter-based methods, New York sales-tax quarters, Connecticut September-30 year, Texas completed-calendar-month lookback, and N/A. Set <strong>Example as of</strong> to display the modeled date window from the same engine used by transaction analysis. Sort by state or method and open the primary source before relying on a collection/remittance conclusion.</p>
+<div class="callout warn"><strong>Scope control:</strong> this explains the economic-nexus threshold lookback. It does not calculate post-registration return filing frequency or due dates.</div>
+<h3>Toolbar</h3>
+<div class="mini-ui"><div class="row"><span class="input">Search all columns...</span><span class="control">Sales $ threshold only</span><span class="control">Clear filters</span><span class="control">Mark visible reviewed today</span><span class="control green">Export filtered table to Excel</span><span class="control green">Export all states to Excel</span><span class="control">Download updated JSON</span></div><div class="row"><span class="control navy">Beginner setup & update guide</span><span class="chip">Showing 51 of 51</span><span class="chip">Dollar-threshold-only: 30</span><span class="chip">Sales-tax / equivalent: 46</span><span class="chip">No statewide sales tax: 4</span></div></div>
+
+<h3>Multi-select filters</h3>
+<p>These five columns support multiple exact criteria: State/Jurisdiction, Review status, Tax regime, Transaction test, and Nexus threshold sales scope. The filter popover keeps the checkbox in a fixed left column and the label aligned on the right. Use the search field inside the popover to narrow long lists.</p>
+<p>Within one multi-select filter, values use OR logic. Across different columns, filters use AND logic.</p>
+
+<h3>Horizontal scrolling</h3>
+<p>Use either the top scrollbar or the bottom table scrollbar. They are synchronized so you do not need to scroll vertically just to move left/right.</p>
+
+<h3>Excel export</h3>
+<ul><li><strong>Export filtered table to Excel</strong> exports only visible rows.</li><li><strong>Export all states to Excel</strong> exports all 51 jurisdictions.</li></ul>
 </section>
 
 <section id="update">
 <h2>4. Controlled tax-data update workflow</h2>
-<p>The update process is deliberately split into research, staging, professional review, and publication. Do not bypass the review step merely because a research tool returns structured JSON.</p>
-<div class="flow"><div class="box">1. Select states</div><div class="arrow">→</div><div class="box">2. Build prompt</div><div class="arrow">→</div><div class="box">3. Research primary authority</div><div class="arrow">→</div><div class="box">4. Stage JSON</div><div class="arrow">→</div><div class="box">5. Review diff</div><div class="arrow">→</div><div class="box">6. Approve</div><div class="arrow">→</div><div class="box">7. Commit / PR</div></div>
-<div class="shot"><img src="./assets/guide/04-update-workflow.png" alt="Controlled update workflow panel"><div class="caption">The app's update panel prepares a source-first prompt, accepts a JSON array, and shows field-by-field proposed changes before approval.</div></div>
+<div class="flow"><div class="box">Choose states</div><div class="arrow">-></div><div class="box">Build prompt</div><div class="arrow">-></div><div class="box">Research primary authority</div><div class="arrow">-></div><div class="box">Stage JSON</div><div class="arrow">-></div><div class="box">Review/approve</div><div class="arrow">-></div><div class="box">Commit to GitHub</div></div>
 
-<div class="step"><div class="num">1</div><div><h3>Start from a review trigger</h3><p>The included <code>nexus-review.yml</code> workflow runs monthly and creates a GitHub Issue for the review cycle. You can also begin a review whenever a state announces legislation, a client fact pattern changes, or you discover conflicting guidance.</p></div></div>
-<div class="step"><div class="num">2</div><div><h3>Select the jurisdiction(s)</h3><p>In the live app, filter the State column to the state you want to review, or leave all states visible. Under <strong>Research scope</strong>, choose <strong>Visible / filtered rows</strong> for a targeted review or <strong>All jurisdictions</strong> for a full scan.</p></div></div>
-<div class="step"><div class="num">3</div><div><h3>Build and copy the research prompt</h3><p>Click <strong>Build prompt</strong>, then <strong>Copy prompt</strong>. The generated prompt contains the current record and tells the researcher to verify the dollar threshold, transaction count, measurement period, sales scope, sales included, collection timing, marketplace interaction, effective date, review date, and official source.</p></div></div>
-<div class="step"><div class="num">4</div><div><h3>Research primary authority first</h3><p>Use a web-capable research tool and insist on official authority: enacted statutes, enrolled bills, revenue-department bulletins, regulations, official FAQs, and official tax-agency pages. Use secondary charts only as a cross-check.</p><table class="table"><tr><th>Preferred</th><th>Use</th></tr><tr><td>Current codified statute</td><td>Best source after legislation has been incorporated into the state code.</td></tr><tr><td>Enacted bill / public act</td><td>Best source when a recent change is not yet fully reflected on agency webpages.</td></tr><tr><td>Revenue bulletin / tax notice</td><td>Useful for effective dates, transition rules, registration timing, and examples.</td></tr><tr><td>Revenue FAQ / remote-seller page</td><td>Useful operational guidance; check that it reflects recent legislation.</td></tr><tr><td>Secondary nexus chart</td><td>Cross-check only. Do not use as final authority if primary sources disagree.</td></tr></table></div></div>
-<div class="step"><div class="num">5</div><div><h3>Require JSON-only output</h3><p>The app expects a JSON array. Each state object may use these keys:</p><div class="codebox">state, status, threshold, transaction_test, measurement_period,
-nexus_sales_scope, sales_basis, collection_timing, marketplace_note,
-rule_effective_date, latest_change_date, last_reviewed,
-source_title, source_url, notes, change_detected, change_note</div><p>Dates should use <code>YYYY-MM-DD</code>. The state name must match the table exactly.</p></div></div>
-<div class="step"><div class="num">6</div><div><h3>Paste and stage—do not approve yet</h3><p>Paste the JSON array into <strong>Stage proposed changes</strong> and click <strong>Stage JSON changes</strong>. The app compares the proposed values to the working record and creates a diff card for each changed state.</p></div></div>
-<div class="step"><div class="num">7</div><div><h3>Perform the CPA review</h3><p>For each proposal, review every changed field and click <strong>Open cited source</strong>. Check at least:</p><ul class="check"><li>Was the law actually enacted, not merely introduced?</li><li>Is the effective date correct?</li><li>Does the threshold use <code>&gt;</code> or <code>≥</code> / “at least” language?</li><li>Does the state count gross, retail, taxable, or another defined sales base?</li><li>Are marketplace-facilitated sales included or excluded in the seller's threshold?</li><li>Does collection begin immediately, prospectively, next month, or after a specified number of days?</li><li>Is the cited source current and official?</li></ul><div class="callout warn"><strong>Do not approve a proposal just because the source URL looks official.</strong> Open it and read the relevant rule.</div></div></div>
-<div class="step"><div class="num">8</div><div><h3>Approve or reject</h3><p>Click <strong>Approve</strong> only after the source supports the proposed field changes. Use <strong>Reject</strong> when the source is inadequate or the wording overstates the law. Approval updates only your browser working copy.</p></div></div>
-<div class="step"><div class="num">9</div><div><h3>Download the reviewed files</h3><p>Click <strong>Download updated JSON</strong> to save the revised <code>state-nexus.json</code>. Click <strong>Download update history</strong> to save <code>update-history.json</code>. Keep both files together.</p></div></div>
-<div class="step"><div class="num">10</div><div><h3>Publish through a reviewable GitHub change</h3><p>Recommended: create a branch such as <code>tax-update-2026-08-illinois-kentucky</code> in GitHub Desktop. Replace <code>data/state-nexus.json</code> and <code>updates/update-history.json</code> with the downloaded files. Commit with a precise summary, for example <code>Update IL and KY economic nexus rules</code>, publish the branch, and open a Pull Request.</p></div></div>
-<div class="step"><div class="num">11</div><div><h3>Check automated validation</h3><p>The Pull Request should run the repository's checks. If validation fails, do not merge. Review the failing job. Typical errors include a missing state, duplicate state, invalid date, missing source URL, malformed JSON, or a benchmark reconciliation mismatch.</p></div></div>
-<div class="step"><div class="num">12</div><div><h3>Merge and verify the live site</h3><p>After review and successful checks, merge the Pull Request to <code>main</code>. The Pages deployment runs automatically. When green, open the live site, filter to the changed state, confirm the updated values/source/date, and export the row to Excel as a final acceptance check.</p></div></div>
-</section>
-
-<section id="examples">
-<h2>5. Worked current-tax examples</h2>
-<h3>Example A — Illinois: remove the 200-transaction test</h3>
-<p><span class="pill">Current law example</span> Illinois Department of Revenue Bulletin FY 2026-12 states that effective January 1, 2026 the 200-transaction threshold no longer applies. The remaining remote-retailer threshold is $100,000 or more in cumulative gross receipts from sales of tangible personal property to Illinois purchasers during the applicable lookback period.</p>
-<p><strong>Primary source:</strong> <a href="https://tax.illinois.gov/research/publications/bulletins/fy-2026-12.html" target="_blank" rel="noopener">Illinois DOR FY 2026-12</a></p>
-<ol class="check"><li>Filter State = <strong>Illinois</strong>.</li><li>Build and copy the research prompt.</li><li>Verify the bulletin's effective date and the post-2025 threshold.</li><li>If your older dataset still says <code>200 transactions</code>, paste the JSON below.</li><li>Stage the proposal and compare the transaction-test, change-date, source, and notes fields.</li><li>Open the cited Illinois source from the proposal card.</li><li>Approve only after confirming the bulletin.</li></ol>
-<div class="codebox">[
-  {
-    "state": "Illinois",
-    "threshold": "$100,000 cumulative gross receipts",
-    "transaction_test": "None (removed 2026-01-01)",
-    "measurement_period": "Preceding 12 months; tested quarterly",
-    "nexus_sales_scope": "Retail sales only (excludes resale)",
-    "sales_basis": "Retail sales of tangible personal property to Illinois purchasers under the remote-retailer rules; marketplace sales generally excluded for individual sellers",
-    "collection_timing": "Determine nexus quarterly based on prior 12 months; comply when threshold standard is met",
-    "marketplace_note": "Marketplace sales collected by facilitator are generally excluded from remote retailer's own threshold test",
-    "rule_effective_date": "2018-10-01",
-    "latest_change_date": "2026-01-01",
-    "last_reviewed": "2026-08-08",
-    "source_title": "Illinois DOR – FY 2026-12",
-    "source_url": "https://tax.illinois.gov/research/publications/bulletins/fy-2026-12.html",
-    "notes": "The 200-transaction test was eliminated effective 2026-01-01.",
-    "change_detected": true,
-    "change_note": "Illinois removed the 200-transaction test effective 2026-01-01."
-  }
-]</div>
-
-<h3>Example B — Kentucky: sales-volume-only test and 60-day timing</h3>
-<p><span class="pill">Current law example</span> Kentucky's current KRS 139.340, effective August 1, 2026, uses a gross-receipts threshold above $100,000 for the previous or current calendar year and requires a remote retailer that crosses the threshold to register and collect no later than the first day of the calendar month that is at most 60 days after the threshold is reached. The 2026 legislation deleted the separate transaction-count nexus standard.</p>
-<p><strong>Primary source:</strong> <a href="https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=58190" target="_blank" rel="noopener">Kentucky LRC – KRS 139.340</a><br><strong>Legislative history:</strong> <a href="https://apps.legislature.ky.gov/record/26rs/hb757.html" target="_blank" rel="noopener">2026 HB 757</a></p>
-<p>This example also shows how to improve a row that already has the right threshold but has a less precise collection-timing description or still cites the bill instead of the codified statute.</p>
-<div class="codebox">[
-  {
-    "state": "Kentucky",
-    "threshold": ">$100,000 gross receipts",
-    "transaction_test": "None (removed 2026-08-01)",
-    "measurement_period": "Current or previous calendar year",
-    "nexus_sales_scope": "All / gross sales",
-    "sales_basis": "Gross receipts from sales of tangible personal property, digital property, or services delivered, electronically transferred, or provided to a Kentucky purchaser, including marketplace-facilitated retail sales for the remote-retailer threshold",
-    "collection_timing": "Register and begin collection no later than the first day of the calendar month that is at most 60 days after the $100,000 threshold is reached",
-    "marketplace_note": "The 2026 amendment removed the transaction-count nexus standard; marketplace-facilitated retail sales are included in the remote-retailer gross-receipts test stated in KRS 139.340",
-    "rule_effective_date": "2018-10-01",
-    "latest_change_date": "2026-08-01",
-    "last_reviewed": "2026-08-08",
-    "source_title": "Kentucky LRC – KRS 139.340",
-    "source_url": "https://apps.legislature.ky.gov/law/statutes/statute.aspx?id=58190",
-    "notes": "Effective 2026-08-01, Kentucky uses a sales-volume threshold only; the separate transaction-count nexus prong was deleted.",
-    "change_detected": true,
-    "change_note": "Kentucky removed the separate transaction-count nexus prong effective 2026-08-01."
-  }
-]</div>
-<div class="callout good"><strong>Why this is a useful training example:</strong> not every update changes the dollar threshold. A current-law review can improve the collection-start rule, sales-base wording, citation, and last-reviewed date while leaving the threshold amount unchanged.</div>
-
-<h3>Example C — no substantive change found</h3>
-<p>If you research a state and confirm that every substantive field is still accurate, you do not need to manufacture a change. Filter to that state and click <strong>Mark visible reviewed today</strong>. This updates the browser working copy's review date and records the review confirmation. Then download the dataset/history and publish them through the same reviewed GitHub process.</p>
+<div class="step"><div class="num">1</div><div><h3>Choose research scope</h3><p>Select <strong>Selected states (up to 10)</strong>, <strong>Visible / filtered rows</strong>, or <strong>All jurisdictions</strong>.</p></div></div>
+<div class="step"><div class="num">2</div><div><h3>Select up to 10 states</h3><p>For selected-state research, click <strong>Show state selector</strong>. Search and check up to 10 states. Click <strong>Hide state selector</strong> to reclaim screen space; the selected-state summary remains visible.</p></div></div>
+<div class="step"><div class="num">3</div><div><h3>Build the prompt</h3><p>Click <strong>Build prompt</strong>. Use <strong>Copy prompt</strong> to move it into your approved research process. Use <strong>Clear prompt</strong> when you want to empty and rebuild the prompt.</p></div></div>
+<div class="step"><div class="num">4</div><div><h3>Research primary authority</h3><p>Prefer enacted statutes/bills, regulations, official revenue-department notices, FAQs, and agency pages. Verify threshold, transaction test, measurement period, sales scope, sales counted, collection timing, marketplace treatment, effective date, and source URL.</p></div></div>
+<div class="step"><div class="num">5</div><div><h3>Paste JSON and stage</h3><p>Paste the returned JSON array into <strong>Stage proposed changes</strong> and click <strong>Stage JSON changes</strong>. The app creates field-level current/proposed diffs.</p></div></div>
+<div class="step"><div class="num">6</div><div><h3>Review source before approval</h3><p>Open the cited source on every material proposal. Confirm the rule is enacted/effective and that dates and wording are accurate. The siren/red star means the material change still needs attention.</p></div></div>
+<div class="step"><div class="num">7</div><div><h3>Approve or reject</h3><p>Approve only supported changes. Rejected proposals do not change the working row.</p></div></div>
+<div class="step"><div class="num">8</div><div><h3>Download and publish</h3><p>Download <code>state-nexus.json</code> and <code>update-history.json</code>, upload them to the matching GitHub paths, and commit through a reviewed direct commit or Pull Request.</p></div></div>
+<div class="step"><div class="num">9</div><div><h3>Verify live deployment</h3><p>Wait for Actions to pass, open the live site, filter to the changed states, open the source links, and run an Excel export as the final acceptance test.</p></div></div>
 </section>
 
 <section>
-<h2>6. Publishing checklist for every tax update</h2>
-<table class="table"><tr><th>Control</th><th>Required action</th></tr>
-<tr><td>Primary authority</td><td>Open and read the cited statute, enacted bill, regulation, bulletin, or official agency guidance.</td></tr>
-<tr><td>Effective date</td><td>Record when the rule legally changes—not merely the webpage update date.</td></tr>
-<tr><td>Review date</td><td>Set <code>last_reviewed</code> to the date you actually verified the row.</td></tr>
-<tr><td>Sales scope</td><td>Confirm gross/all, retail-only, taxable-only, or special defined base.</td></tr>
-<tr><td>Marketplace interaction</td><td>Confirm whether facilitated sales count in the seller's threshold and who collects/remits.</td></tr>
-<tr><td>Collection timing</td><td>Capture any prospective start date, next-month rule, grace period, or registration deadline.</td></tr>
-<tr><td>GitHub review</td><td>Prefer a Pull Request for material rule changes; review the file diff before merge.</td></tr>
-<tr><td>Automated checks</td><td>Require the dataset/audit/JavaScript checks to pass.</td></tr>
-<tr><td>Live verification</td><td>After deploy, inspect the changed row and run an Excel export.</td></tr></table>
+<h2>5. Tax-review checklist before approval</h2>
+<table class="table"><tr><th>Item</th><th>Verify</th></tr>
+<tr><td>Authority</td><td>Official/primary source where available.</td></tr>
+<tr><td>Legal status</td><td>Enacted/effective, not merely introduced or proposed.</td></tr>
+<tr><td>Threshold</td><td>Dollar amount and comparison wording.</td></tr>
+<tr><td>Transaction test</td><td>Current prong, repeal date, or none.</td></tr>
+<tr><td>Measurement period</td><td>Current/prior year, rolling period, quarterly test, etc.</td></tr>
+<tr><td>Sales scope</td><td>Gross/all, retail-only, taxable-only, or special base.</td></tr>
+<tr><td>Marketplace</td><td>Who collects/remits and whether facilitated sales count toward threshold.</td></tr>
+<tr><td>Collection timing</td><td>Registration/start date or grace period after threshold is reached.</td></tr>
+<tr><td>Dates</td><td>Rule effective, latest material change, and actual review date.</td></tr>
+<tr><td>URL</td><td>Current state authority link opens and supports the conclusion.</td></tr></table>
 </section>
 
-<section id="troubleshooting">
-<h2>7. Troubleshooting</h2>
-<table class="table"><tr><th>Problem</th><th>What to check</th></tr>
-<tr><td>Pages site shows 404</td><td>Settings → Pages must use GitHub Actions; confirm the Deploy GitHub Pages workflow completed and <code>index.html</code> is at the project root.</td></tr>
-<tr><td>Table says loading / no rows</td><td>Check that <code>data/state-nexus.json</code> exists and is valid JSON. Open the Actions validation logs.</td></tr>
-<tr><td>Changes disappear on another computer</td><td>Browser working-copy changes are stored locally. Download the JSON files and commit them to GitHub.</td></tr>
-<tr><td>Monthly review issue is not created</td><td>Open Actions → Monthly Nexus Review Reminder. Confirm Actions are enabled and run it manually once with <strong>Run workflow</strong>.</td></tr>
-<tr><td>Excel export contains fewer rows</td><td><strong>Export filtered table</strong> exports only visible rows. Use <strong>Export all states to Excel</strong> for all 51 jurisdictions.</td></tr>
-<tr><td>Pull Request check fails</td><td>Open the failing job. Correct the JSON/schema/source/date issue before merging. Never bypass a failed tax-data validation merely to deploy.</td></tr>
-<tr><td>GitHub Pages does not show the guide</td><td>Confirm <code>guide.html</code> is in the repository root and that the deploy workflow includes it in the Pages artifact.</td></tr></table>
+<section id="trouble">
+<h2>6. Troubleshooting</h2>
+<table class="table"><tr><th>Problem</th><th>Action</th></tr>
+<tr><td>Workflow not visible</td><td>Confirm files are under <code>.github/workflows/</code>, not repository root.</td></tr>
+<tr><td>Pages does not update</td><td>Open Actions and verify the latest build/deploy is green; hard-refresh the browser.</td></tr>
+<tr><td>Old local data appears</td><td>Use Reset working copy if you intentionally want to discard browser-local edits.</td></tr>
+<tr><td>Filter appears empty</td><td>Clear that filter and global search, then reopen the multi-select popover.</td></tr>
+<tr><td>Excel contains fewer rows</td><td>Filtered export respects current filters. Use Export all states for all 51.</td></tr>
+<tr><td>Siren appears</td><td>Review the starred state proposal/source; do not ignore an unresolved material change.</td></tr>
+<tr><td>Source URL later breaks</td><td>Research the current official agency page and update the source field after review.</td></tr></table>
 </section>
 
 <section>
-<h2>8. Recommended operating cadence</h2>
-<div class="flow"><div class="box">Monthly<br><span class="small">full change scan</span></div><div class="box">As announced<br><span class="small">material legislation</span></div><div class="box">Before client reliance<br><span class="small">re-verify key state</span></div><div class="box">After every update<br><span class="small">PR + deploy + live check</span></div></div>
-<p>A scheduled review is a control, not a substitute for event-driven monitoring. Material legislation can become effective between scheduled reviews. For a filing or collection position with meaningful exposure, re-open the primary authority before relying on the table.</p>
+
+<section><h2>Substantive rules audit baseline and v1.3.1 scope review</h2><div class="callout good"><strong>v1.3.1 scope/UX control.</strong> The rules engine retains structured schema-v5 measurement codes/operators and historical-window safeguards. The new measurement-reference smoke test also requires all 51 jurisdictions to produce a mapped method label, determination explanation, and modeled example.</div><p>Special audited engines include Minnesota rolling prior 12 months; Illinois and Missouri quarter-end trailing 12 months; Connecticut's September-30 period; New York's immediately preceding four sales-tax quarters; Texas's preceding 12 completed calendar months; Pennsylvania's prior calendar year; and Vermont's any preceding 12-month period. D.C. exactly 200 retail sales and Texas exactly $500,000 are forced to human review where current materials are not uniform at the exact boundary.</p><p>The app is an economic-nexus early-warning/watchlist workpaper, not a complete nexus or return filing-frequency engine. A below-modeled-threshold result is not an all-clear because other nexus bases and facts outside the simplified import are not tested. Review current primary authority before starting or stopping registration, collection, remittance, or filing.</p></section>
+<section><h2>Transaction screening in v1.3.1</h2><p>The app now has a separate <strong>Sales/Transaction Economic-Nexus Early Warning</strong> section. Download the simplified XLSX/CSV template, populate Document Date, Document #, Customer, Ship-to State, Sales $ Before Taxes, and Customer Type, then import one or more files. Set the actual data coverage dates and analysis date. The app applies each state's stored measurement period, counts each state/document number once for transaction screening, flags incomplete-period data, and identifies Review/Watch/Below-modeled-threshold states. Below-modeled-threshold is based only on imported data and is not a no-nexus conclusion. Use the state primary-source link before deciding registration, collection, or filing timing.</p><p>Click the information icon beside any Measurement Period to see the modeled date window and an operational explanation, including current/prior-calendar-year and quarter-end examples.</p></section>
+<h2>7. Governance reminder</h2>
+<div class="callout warn"><strong>Research does not equal publication.</strong> AI/research output should be staged, compared to the current record, checked against primary authority, approved by a qualified reviewer, and then committed to GitHub. Do not bypass a failed validation merely to publish.</div>
 </section>
-<div class="footer">Prepared for the State – Economic Nexus Filing Requirements project. GitHub interface labels can evolve; this guide is aligned to GitHub's documented Pages/Actions workflow as reviewed August 8, 2026. Tax examples are research guidance, not legal advice.</div>
+
+<div class="footer">State - Economic Nexus Filing Requirements project. User manual synchronized to audited Nexus app v1.3.1 on 2026-08-09. This is a research/operating guide, not legal advice.</div>
 </main></div></body></html>

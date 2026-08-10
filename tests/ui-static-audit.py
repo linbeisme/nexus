@@ -47,7 +47,14 @@ required_ids = {
     "tableScrollTop", "tableScrollTopSpacer", "tableWrap", "statePicker",
     "statePickerControls", "statePickerToggle", "selectedStateSummary",
     "statePickerSearch", "stateSelectionCount", "clearStateSelection", "stateSelectionList",
-    "versionBaselineLine", "auditLine", "sourceAuditLine", "clearPrompt"
+    "versionBaselineLine", "auditLine", "sourceAuditLine", "clearPrompt",
+    "measurementDialog", "measurementTitle", "measurementBody", "transactionFiles",
+    "analysisAsOf", "coverageStart", "coverageEnd", "watchPercent", "analyzeTransactions",
+    "clearTransactionAnalysis", "exportTransactionAnalysis", "downloadNormalizedCsv",
+    "transactionImportStatus", "transactionSummary", "analysisResultsArea", "analysisResultFilter",
+    "analysisTable", "analysisTbody", "transactionPreviewBody",
+    "measurement-reference", "measurementMethodFilter", "measurementReferenceDate", "measurementSort",
+    "measurementSearch", "clearMeasurementFilters", "measurementStats", "measurementReferenceTable", "measurementReferenceBody"
 }
 ids = [tag.get("id") for tag in soup.find_all(attrs={"id": True})]
 for rid in sorted(required_ids):
@@ -92,8 +99,8 @@ check("Phone responsive breakpoint exists", "@media (max-width:620px)" in css)
 check("Phone toolbar controls expand full width", ".toolbar-row>*:not(.stats){width:100%}" in compact_css)
 
 
-# Version 1.1 UX requirements.
-check("Version 1.1 is visible", "v1.1" in soup.get_text(" ", strip=True))
+# Version 1.3.1 UX requirements.
+check("Version 1.3.1 is configured", "APP_VERSION = '1.3.1'" in js and dataset.get("app_version") == "1.3.1")
 check("Money bag favicon is configured", bool(soup.find("link", attrs={"rel": "icon", "href": "./assets/favicon.svg"})))
 check("Day/night theme toggle exists", soup.find(id="themeToggle") is not None and "toggleTheme" in js)
 check("Night theme CSS exists", 'html[data-theme="night"]' in css)
@@ -115,6 +122,60 @@ check("Only one multi-filter popover stays open", "querySelectorAll('.multi-filt
 for key in ["state","review_status","status","transaction_test","nexus_sales_scope"]:
     check(f"Multi-criteria filter enabled for {key}", key in re.search(r"MULTI_FILTER_KEYS = new Set\(\[(.*?)\]\)", js, re.S).group(1))
 check("Source URL audit metadata is present", dataset.get("source_url_audit_date") == "2026-08-08" and dataset.get("source_url_audit_count") == 51)
+
+
+# Version 1.3.1 transaction-analysis and independently audited measurement-period requirements.
+page_text = soup.get_text(" ", strip=True)
+check("State economic-nexus thresholds section exists", "State Economic-Nexus Thresholds" in page_text)
+check("Sales/Transaction early-warning section exists", "Sales/Transaction Economic-Nexus Early Warning" in page_text)
+
+check("Measurement Period Determination section exists", "Measurement Period Determination" in page_text)
+check("Measurement method filter exists", soup.find(id="measurementMethodFilter") is not None and "QUARTER_BASED" in html)
+check("Measurement reference supports example date", soup.find(id="measurementReferenceDate") is not None and "measurementExampleText" in js)
+check("Measurement reference supports method sorting", soup.find(id="measurementSort") is not None and "measurementMethodLabel" in js)
+check("Measurement reference renders all jurisdictions from dataset", "renderMeasurementReference" in js and "data.filter(r=>measurementFilterMatches" in js)
+check("Measurement section distinguishes threshold lookback from filing frequency", "does not determine post-registration return filing frequency or due dates" in page_text)
+check("Research and Update section exists", "Research and Update" in page_text)
+check("Transaction importer accepts multiple files", bool(soup.find(id="transactionFiles") and soup.find(id="transactionFiles").has_attr("multiple")))
+check("XLSX and CSV templates are linked", bool(soup.find("a", href="./templates/Nexus_Transaction_Threshold_Monitor_Simplified.xlsx") and soup.find("a", href="./templates/Nexus_Transaction_Threshold_Monitor_Simplified.csv")))
+check("Browser SheetJS import support is referenced", "cdn.sheetjs.com/xlsx-0.20.3" in html)
+check("Duplicate document grouping exists", "buildDocumentGroups" in js and "distinct imported row(s) consolidated to one transaction" in js)
+check("State transaction analysis uses measurement windows", "getMeasurementWindows" in js and "analyzeState" in js)
+check("Measurement-period info dialog is wired", "openMeasurementDialog" in js and "data-measurement-state" in js)
+check("Incomplete data coverage can force review", "incomplete measurement-period data" in js.lower())
+check("Taxable-only simplified-data limitation is explicit", "Taxable-sales-only threshold" in js)
+check("Analysis export control is wired", "exportTransactionAnalysis" in js and "nexus_transaction_analysis_" in js)
+check("Normalized transaction export is wired", "downloadNormalizedTransactionsCsv" in js)
+check("Transaction section warns local-browser processing", "processed in your browser" in page_text)
+
+check("Early-warning/watchlist positioning is explicit", "early-warning and watchlist" in page_text.lower())
+check("Below-threshold result is explicitly not an all-clear", "not an “all clear”" in page_text.lower() or "not an all-clear" in page_text.lower())
+check("Below result status is import-limited and modeled", "Below modeled economic-nexus threshold — based on imported data" in js)
+
+
+check("Schema v5 is loaded", dataset.get("schema_version") == 5)
+check("App version 1.3.1 is in dataset", dataset.get("app_version") == "1.3.1")
+check("Rules/logic audit metadata is current", dataset.get("rules_logic_audit_date") == "2026-08-09" and dataset.get("measurement_period_audit_date") == "2026-08-09")
+check("Professional note distinguishes nexus screening from filing frequency", "sales-tax return filing-frequency engine" in page_text and "complete nexus/compliance determination" in page_text)
+check("State thresholds subtitle distinguishes screening from complete nexus/return timing", "does not determine complete nexus, return frequency, or due dates" in page_text)
+check("Structured measurement engine is used", "measurement_code" in js and "getAnalysisMeasurementWindows" in js)
+check("Historical threshold crossing detection exists", "historical threshold crossing detected" in js.lower())
+check("Current-year historical YTD checkpoints exist", "historical current-year checkpoint" in js)
+check("Structured threshold operators are used", "dollar_threshold_operator" in js and "transaction_threshold_operator" in js and "threshold_logic" in js)
+check("Exact-boundary review controls exist", "dollar_review_floor" in js and "transaction_review_floor" in js and "threshold boundary ambiguity" in js.lower())
+check("Reused document number across customers forces review", "document number reused across customers" in js.lower())
+check("Negative sales/credits force review", "returns/credits present" in js.lower())
+check("TPP-only limitation is explicit", "TPP-only threshold" in js)
+check("Transaction definition is disclosed as a proxy", "State law may define a sale/transaction by invoice, order, contract, or another unit" in js)
+check("Other-nexus and filing-frequency limitations are explicit", "actual sales-tax return filing frequency/due dates" in js)
+for st,code in {
+    "Minnesota":"ROLLING_12_MONTHS", "Pennsylvania":"PRIOR_CY", "Vermont":"ROLLING_12_MONTHS",
+    "Illinois":"QUARTER_END_TRAILING_12", "Missouri":"QUARTER_END_TRAILING_12",
+    "Connecticut":"CT_SEP30_YEAR", "New York":"NY_FOUR_SALES_TAX_QUARTERS",
+    "Texas":"PRIOR_12_COMPLETE_CAL_MONTHS"
+}.items():
+    row=next(x for x in states if x["state"]==st)
+    check(f"Audited measurement code for {st}", row.get("measurement_code")==code, str(row.get("measurement_code")))
 
 # Dataset assumptions that drive the UI.
 check("Exactly 51 jurisdictions", len(states) == 51, f"count={len(states)}")

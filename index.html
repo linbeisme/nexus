@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CPA research app for state remote-seller sales tax economic nexus collection and remittance requirements.">
+  <meta name="description" content="CPA research app for state remote-seller sales tax economic nexus collection, filing, and transaction threshold review.">
   <meta name="theme-color" id="themeColor" content="#f5f7fb">
   <title>State Sales Tax Nexus Requirements</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
@@ -16,14 +16,15 @@
     })();
   </script>
   <link rel="stylesheet" href="./assets/styles.css">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" defer></script>
 </head>
 <body>
 <main class="wrap">
   <header class="page-header">
     <div>
-      <div class="eyebrow">CPA RESEARCH WORKPAPER <span class="version-badge">v1.1</span></div>
+      <div class="eyebrow">CPA RESEARCH WORKPAPER <span class="version-badge">v1.3.1</span></div>
       <h1>State Seller Sales Tax Collection &amp; Remittance Requirements</h1>
-      <p class="subtitle">Economic-nexus reference for remote sellers. “Withholding” is treated as the seller’s duty to <strong>collect and remit sales/use tax</strong>, not payroll or income-tax withholding.</p>
+      <p class="subtitle">Economic-nexus <strong>early-warning and watchlist</strong> tool for remote sellers. It identifies states where imported sales activity is approaching, meeting, or may previously have met modeled sales/use-tax economic-nexus thresholds. It does not determine complete nexus or prescribe how to register, file, or remit.</p>
     </div>
     <div class="header-tools">
       <div class="stamp-line">
@@ -40,57 +41,207 @@
     </div>
   </header>
 
-  <section class="notice"><strong>Professional-use note:</strong> This application is a research aid, not legal advice. Physical presence, affiliate/click-through nexus, product taxability, marketplace-facilitator rules, home-rule jurisdictions, trailing nexus, and special taxes may create obligations outside the economic-nexus rule summarized here. Confirm material positions against current primary authority.</section>
+  <section class="notice"><strong>Professional-use note:</strong> This application is a conservative sales/use-tax economic-nexus early-warning workpaper, not legal advice, a complete nexus/compliance determination, or a sales-tax return filing-frequency engine. A result below the modeled threshold is <strong>not an “all clear”</strong>: physical presence, affiliate/click-through nexus, related-entity aggregation, marketplace facts, product/service taxability, exemption documentation, home-rule/local rules, trailing nexus, special taxes, or incomplete/misclassified source data may create obligations outside this screen. Confirm every material registration, collection, remittance, or filing conclusion against current primary authority.</section>
 
-  <section class="status-grid" aria-label="Dataset review status">
-    <article><span>Last full review</span><strong id="lastFullReview">—</strong></article>
-    <article><span>Next scheduled review</span><strong id="nextReview">—</strong></article>
-    <article><span>Review due</span><strong id="reviewDueCount">—</strong></article>
-    <article><span>Approved changes (local)</span><strong id="approvedChangeCount">0</strong></article>
-    <article><span>Pending proposals</span><strong id="proposalCount">0</strong></article>
+  <nav class="workspace-nav" aria-label="Application sections">
+    <a href="#state-thresholds">1. State Economic-Nexus Thresholds</a>
+    <a href="#measurement-reference">2. Measurement Period Determination</a>
+    <a href="#transaction-review">3. Sales/Transaction Economic-Nexus Early Warning</a>
+    <a href="#research-update">4. Research and Update</a>
+  </nav>
+
+  <section id="state-thresholds" class="workspace-section">
+    <div class="section-heading section-title-row">
+      <div>
+        <div class="eyebrow">SECTION 1</div>
+        <h2>State Economic-Nexus Thresholds</h2>
+        <p class="section-subtitle">Reference economic-nexus sales thresholds, transaction tests, measurement periods, sales scope, timing, and primary authority. This section identifies states that may warrant registration/collection review; it does not determine complete nexus, return frequency, or due dates.</p>
+      </div>
+    </div>
+
+    <section class="status-grid" aria-label="Dataset review status">
+      <article><span>Last full review</span><strong id="lastFullReview">—</strong></article>
+      <article><span>Next scheduled review</span><strong id="nextReview">—</strong></article>
+      <article><span>Review due</span><strong id="reviewDueCount">—</strong></article>
+      <article><span>Approved changes (local)</span><strong id="approvedChangeCount">0</strong></article>
+      <article><span>Pending proposals</span><strong id="proposalCount">0</strong></article>
+    </section>
+
+    <section class="toolbar panel">
+      <div class="toolbar-row toolbar-actions">
+        <input id="globalSearch" class="grow" type="search" placeholder="Search all columns…" aria-label="Search all columns">
+        <label class="toggle-control" title="Show only jurisdictions whose economic-nexus test has a dollar-sales threshold and no transaction-count prong.">
+          <input id="dollarThresholdOnly" type="checkbox">
+          <span>Sales $ threshold only</span>
+        </label>
+        <button id="clearFilters">Clear filters</button>
+        <button id="markReviewed">Mark visible reviewed today</button>
+        <button id="exportExcel" class="excel">Export filtered table to Excel</button>
+        <button id="exportAllExcel" class="excel">Export all states to Excel</button>
+        <button id="downloadDataset">Download updated JSON</button>
+        <button id="resetWorkingCopy" class="danger">Reset working copy</button>
+      </div>
+      <div class="toolbar-row toolbar-status">
+        <a class="button-link guide-link" href="./guide.html">Beginner setup &amp; update guide</a>
+        <div id="stats" class="stats inline-stats" aria-live="polite"></div>
+      </div>
+      <div class="scope-legend" role="note">
+        <strong>Nexus threshold sales scope:</strong> “All / gross sales” generally includes resale and exempt/nontaxable sales within the state-defined sales base; “Retail sales only” excludes resale; “Taxable sales only” excludes nontaxable sales. Some states limit gross sales to specified property or receipts, as stated in the detailed sales-basis column.
+      </div>
+    </section>
+
+    <section class="table-card" aria-label="State nexus requirements table">
+      <div id="tableScrollTop" class="table-scroll-top" aria-label="Horizontal scroll for the state table" tabindex="0"><div id="tableScrollTopSpacer"></div></div>
+      <div class="table-wrap" id="tableWrap">
+        <table id="nexusTable">
+          <thead>
+            <tr id="headerRow"></tr>
+            <tr id="filterRow" class="filter-row"></tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </section>
   </section>
 
-  <section class="toolbar panel">
-    <div class="toolbar-row toolbar-actions">
-      <input id="globalSearch" class="grow" type="search" placeholder="Search all columns…" aria-label="Search all columns">
-      <label class="toggle-control" title="Show only jurisdictions whose economic-nexus test has a dollar-sales threshold and no transaction-count prong.">
-        <input id="dollarThresholdOnly" type="checkbox">
-        <span>Sales $ threshold only</span>
-      </label>
-      <button id="clearFilters">Clear filters</button>
-      <button id="markReviewed">Mark visible reviewed today</button>
-      <button id="exportExcel" class="excel">Export filtered table to Excel</button>
-      <button id="exportAllExcel" class="excel">Export all states to Excel</button>
-      <button id="downloadDataset">Download updated JSON</button>
-      <button id="resetWorkingCopy" class="danger">Reset working copy</button>
+  <section id="measurement-reference" class="workspace-section measurement-reference-section">
+    <div class="section-heading section-title-row">
+      <div>
+        <div class="eyebrow">SECTION 2</div>
+        <h2>Measurement Period Determination</h2>
+        <p class="section-subtitle">See how each jurisdiction's economic-nexus measurement period is determined for registration, seller collection/remittance, and related filing review. This section explains the threshold lookback; it does not determine post-registration return filing frequency or due dates.</p>
+      </div>
+      <span class="badge neutral">51-jurisdiction audited measurement map</span>
     </div>
-    <div class="toolbar-row toolbar-status">
-      <a class="button-link guide-link" href="./guide.html">Beginner setup &amp; update guide</a>
-      <div id="stats" class="stats inline-stats" aria-live="polite"></div>
-    </div>
-    <div class="scope-legend" role="note">
-      <strong>Nexus threshold sales scope:</strong> “All / gross sales” generally includes resale and exempt/nontaxable sales within the state-defined sales base; “Retail sales only” excludes resale; “Taxable sales only” excludes nontaxable sales. Some states limit gross sales to specified property or receipts, as stated in the detailed sales-basis column.
-    </div>
-  </section>
 
-  <section class="table-card" aria-label="State nexus requirements table">
-    <div id="tableScrollTop" class="table-scroll-top" aria-label="Horizontal scroll for the state table" tabindex="0"><div id="tableScrollTopSpacer"></div></div>
-    <div class="table-wrap" id="tableWrap">
-      <table id="nexusTable">
-        <thead>
-          <tr id="headerRow"></tr>
-          <tr id="filterRow" class="filter-row"></tr>
-        </thead>
-        <tbody id="tbody"></tbody>
+    <div class="analysis-note" role="note">
+      <strong>How to use this section:</strong> Filter by measurement method, search by state or wording, and change the example date to see the modeled period. Non-calendar-year methods include a concrete example. For annual methods, the table explains whether the state uses the current year, prior year, or both. Primary authority controls if a state applies a special transition, trailing-nexus, marketplace, or fact-specific rule.
+    </div>
+
+    <div class="measurement-toolbar panel">
+      <label for="measurementMethodFilter">Measurement method</label>
+      <select id="measurementMethodFilter">
+        <option value="all">All methods</option>
+        <option value="CY_OR_PRIOR_CY">Current or prior calendar year</option>
+        <option value="PRIOR_CY">Prior calendar year</option>
+        <option value="ROLLING_12_MONTHS">Rolling 12 months</option>
+        <option value="QUARTER_BASED">Quarter-based methods</option>
+        <option value="QUARTER_END_TRAILING_12">Quarter-end trailing 12 months</option>
+        <option value="NY_FOUR_SALES_TAX_QUARTERS">New York four sales-tax quarters</option>
+        <option value="CT_SEP30_YEAR">Connecticut September-30 year</option>
+        <option value="PRIOR_12_COMPLETE_CAL_MONTHS">Prior 12 completed calendar months</option>
+        <option value="NA">No statewide general sales tax</option>
+      </select>
+      <label for="measurementReferenceDate">Example as of</label>
+      <input id="measurementReferenceDate" type="date">
+      <label for="measurementSort">Sort</label>
+      <select id="measurementSort">
+        <option value="state">State A-Z</option>
+        <option value="method">Measurement method, then state</option>
+      </select>
+      <input id="measurementSearch" class="grow" type="search" placeholder="Search state, method, period, or timing…" aria-label="Search measurement-period reference">
+      <button id="clearMeasurementFilters" type="button">Clear measurement filters</button>
+    </div>
+    <div id="measurementStats" class="stats inline-stats measurement-stats" aria-live="polite"></div>
+
+    <div class="analysis-table-wrap measurement-reference-wrap">
+      <table id="measurementReferenceTable" class="analysis-table measurement-reference-table">
+        <thead><tr>
+          <th>State</th><th>Measurement method</th><th>Stored rule</th><th>How the period is determined</th><th>Example / modeled period</th><th>Threshold test</th><th>Collection / registration / remittance timing</th><th>Primary source</th>
+        </tr></thead>
+        <tbody id="measurementReferenceBody"></tbody>
       </table>
     </div>
   </section>
 
-  <section class="panel update-panel">
-    <div class="section-heading">
+  <section id="transaction-review" class="workspace-section transaction-section">
+    <div class="section-heading section-title-row">
       <div>
-        <div class="eyebrow">CONTROLLED UPDATE WORKFLOW</div>
-        <h2>Research, stage, review, then publish</h2>
+        <div class="eyebrow">SECTION 3</div>
+        <h2>Sales/Transaction Economic-Nexus Early Warning</h2>
+        <p class="section-subtitle">Import sales activity and identify states where modeled economic-nexus thresholds are approaching, met, or may have been met historically. Duplicate document numbers in the same ship-to state count as one transaction under this workpaper convention; state law may define a transaction differently, so transaction-count results require source review.</p>
+      </div>
+      <span class="badge neutral privacy-badge">Files are processed in your browser; this app does not upload transaction data to GitHub.</span>
+    </div>
+
+    <div class="analysis-note" role="note">
+      <strong>Screening limitation:</strong> The simplified template has only document date, document number, customer, ship-to state, sales before tax, and customer type. Therefore taxable-sales-only thresholds, marketplace-facilitator treatment, product taxability, exemption-certificate validity, physical or other nexus, and state-specific legal definitions of a “transaction” may require additional review. A “Review required” result is a prompt for tax review—not an automatic tax determination. A “Below modeled economic-nexus threshold” result means only that the imported data did not meet the modeled economic-nexus test; it is <strong>not</strong> a conclusion that the business has no nexus or no sales/use-tax obligation in that state.
+    </div>
+
+    <div class="transaction-controls panel">
+      <div class="control-group">
+        <label>Analysis template</label>
+        <div class="toolbar-row compact">
+          <a class="button-link" href="./templates/Nexus_Transaction_Threshold_Monitor_Simplified.xlsx" download>Download XLSX template</a>
+          <a class="button-link" href="./templates/Nexus_Transaction_Threshold_Monitor_Simplified.csv" download>Download CSV template</a>
+        </div>
+      </div>
+      <div class="control-group file-control-group">
+        <label for="transactionFiles">Import completed template(s)</label>
+        <input id="transactionFiles" type="file" accept=".xlsx,.xls,.csv,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" multiple>
+        <span class="small">You may select multiple files. Rows from all selected files are combined before duplicate-document screening.</span>
+      </div>
+      <div class="analysis-date-grid">
+        <label for="analysisAsOf">Analysis as of</label><input id="analysisAsOf" type="date">
+        <label for="coverageStart">Data coverage starts</label><input id="coverageStart" type="date">
+        <label for="coverageEnd">Data coverage ends</label><input id="coverageEnd" type="date">
+        <label for="watchPercent">Watch threshold</label><select id="watchPercent"><option value="0.80">80%</option><option value="0.85">85%</option><option value="0.90" selected>90%</option><option value="0.95">95%</option></select>
+      </div>
+      <div class="small">After import, coverage dates are inferred from the first/last transaction found. Adjust them to the actual date range of the source-system report (even if there were no sales on the boundary dates) so the app can judge whether a state's full measurement period is covered.</div>
+      <div class="toolbar-row compact analysis-actions">
+        <button id="analyzeTransactions" class="primary">Import &amp; analyze</button>
+        <button id="clearTransactionAnalysis">Clear imported data</button>
+        <button id="exportTransactionAnalysis" class="excel" disabled>Export analysis to Excel</button>
+        <button id="downloadNormalizedCsv" disabled>Download normalized transactions CSV</button>
+      </div>
+      <div id="transactionImportStatus" class="small analysis-status" aria-live="polite">No transaction files imported.</div>
+    </div>
+
+    <div id="transactionSummary" class="analysis-summary hidden" aria-live="polite"></div>
+
+    <div id="analysisResultsArea" class="analysis-results hidden">
+      <div class="section-heading subheading">
+        <div>
+          <h3>State screening results</h3>
+          <p class="section-subtitle">States flagged “Review required” should be researched using the primary-source link. “Watch” is an early-warning status. “Below modeled economic-nexus threshold” is not an all-clear and does not test other nexus bases.</p>
+        </div>
+        <div class="toolbar-row compact">
+          <label for="analysisResultFilter" class="inline-label">Show</label>
+          <select id="analysisResultFilter">
+            <option value="all">All states</option>
+            <option value="review">Review required</option>
+            <option value="watch">Watch</option>
+            <option value="below">Below modeled threshold</option>
+          </select>
+        </div>
+      </div>
+      <div class="analysis-table-wrap">
+        <table id="analysisTable" class="analysis-table">
+          <thead><tr>
+            <th>State</th><th>Screening result</th><th>Measurement period</th><th>Period evaluated</th><th>Threshold sales</th><th>Unique transactions</th><th>Dollar threshold</th><th>Transaction test</th><th>Retail sales</th><th>Wholesale sales</th><th>Data / method note</th><th>Primary source</th>
+          </tr></thead>
+          <tbody id="analysisTbody"></tbody>
+        </table>
+      </div>
+
+      <details class="transaction-preview-details">
+        <summary>Imported transaction preview and duplicate-document review</summary>
+        <div class="analysis-table-wrap preview-wrap">
+          <table class="analysis-table">
+            <thead><tr><th>Document date</th><th>Document #</th><th>Customer</th><th>Ship-to state</th><th>Sales before tax</th><th>Customer type</th><th>Rows in document group</th><th>Data note</th></tr></thead>
+            <tbody id="transactionPreviewBody"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="research-update" class="workspace-section update-panel">
+    <div class="section-heading section-title-row">
+      <div>
+        <div class="eyebrow">SECTION 4</div>
+        <h2>Research and Update</h2>
+        <p class="section-subtitle">Research current primary authority, stage proposed changes, review differences, and publish only approved updates.</p>
       </div>
       <span class="badge neutral">Browser changes are not published until committed to GitHub</span>
     </div>
@@ -167,6 +318,14 @@
     <p>Source URLs in the table should point to primary state authority wherever available. Review dates are working-paper metadata and do not necessarily represent a state agency webpage publication date.</p>
   </footer>
 </main>
+
+<dialog id="measurementDialog">
+  <form method="dialog" class="modal measurement-modal">
+    <div class="modal-title-row"><div><div class="eyebrow">MEASUREMENT PERIOD EXPLAINER</div><h2 id="measurementTitle">Measurement period</h2></div><button value="cancel" class="modal-close" aria-label="Close">×</button></div>
+    <div id="measurementBody" class="measurement-body"></div>
+    <div class="modal-actions"><button value="cancel">Close</button></div>
+  </form>
+</dialog>
 
 <dialog id="editDialog">
   <form method="dialog" class="modal" id="editForm">

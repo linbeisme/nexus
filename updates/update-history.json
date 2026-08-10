@@ -24,6 +24,54 @@
       "summary": "Version 1.1 UX release: Day/Night theme, money-bag favicon, dark-green Excel actions, light-yellow inputs, light-purple secondary actions, synchronized top/bottom table scrollbars, inline results indicators, multi-criteria filters for five columns, up-to-10-state research batches, material-change siren/red-star alerts, and 51-jurisdiction source-URL refresh/validation.",
       "reviewed_by": "Independent UI/source-link QA; repository maintainer approval required",
       "source": "SOURCE_URL_AUDIT.md"
+    },
+    {
+      "date": "2026-08-08",
+      "type": "v1.1_ui_alignment_refinement",
+      "jurisdictions": 51,
+      "summary": "Final v1.1 interface refinement: fixed multi-select popover checkbox/text alignment and sizing, split header metadata into three lines, collapsed the up-to-10-state selector by default, added Clear prompt, moved guide/status chips to a dedicated second toolbar row, and styled the Beginner guide control navy blue.",
+      "reviewed_by": "UI regression QA; repository maintainer approval required",
+      "source": "V1_1_CHANGELOG.md"
+    },
+    {
+      "date": "2026-08-08",
+      "type": "documentation_sync",
+      "jurisdictions": 51,
+      "summary": "Synchronized technical documentation, browser-only setup guide, user manual, public guide, audit report, changelog, and documentation audit log to the final v1.1 UI. Reran dataset validation, independent reconciliation, JavaScript syntax, 113-check UI audit, and XLSX export smoke test.",
+      "reviewed_by": "Documentation/QA synchronization; repository maintainer approval required",
+      "source": "DOCUMENTATION_AUDIT_LOG.md"
+    },
+    {
+      "date": "2026-08-09",
+      "type": "v1.2_transaction_analysis_release",
+      "jurisdictions": 51,
+      "summary": "Version 1.2 reorganized the app into State Thresholds for Filing, Sales/Transaction Review for Withholding/Filing, and Research and Update; added simplified XLSX/CSV transaction import, unique state/document transaction grouping, measurement-period screening, incomplete-data safeguards, analysis export, and per-state measurement-period explainers.",
+      "reviewed_by": "Feature/QA pass; repository maintainer approval required",
+      "source": "V1_2_CHANGELOG.md"
+    },
+    {
+      "date": "2026-08-09",
+      "type": "v1.2.1_independent_rules_logic_audit",
+      "jurisdictions": 51,
+      "summary": "Independent audit of all 51 economic-nexus rule records and transaction-screening logic, with emphasis on measurement periods. Upgraded to schema v5 structured operators/logic/measurement codes; corrected Minnesota, Pennsylvania and Vermont measurement handling; hardened Illinois/Missouri/Connecticut/New York/Texas engines; added historical-crossing, exact-boundary, duplicate/reuse, negative-credit and retail/wholesale classification safeguards; clarified that the app screens nexus and does not determine post-registration return filing frequency.",
+      "reviewed_by": "Independent research/QA pass; qualified tax reviewer approval required before client reliance",
+      "source": "INDEPENDENT_RULES_LOGIC_AUDIT.md"
+    },
+    {
+      "date": "2026-08-09",
+      "type": "v1.3.0_measurement_reference_and_post_update_audit",
+      "jurisdictions": 51,
+      "summary": "Added the dedicated Measurement Period Determination section with method filtering, state/method sorting, search, modeled examples, timing and source references using the production rules engine; added 51-jurisdiction measurement-reference regression testing; performed a fresh independent audit; and corrected North Carolina economic-threshold-only compliance timing effective 2026-07-02 under Session Law 2026-31.",
+      "reviewed_by": "Independent research/QA pass; qualified tax reviewer approval required before client reliance",
+      "source": "POST_UPDATE_INDEPENDENT_AUDIT.md"
+    },
+    {
+      "date": "2026-08-09",
+      "type": "v1.3.1_scope_and_result_semantics_hardening",
+      "jurisdictions": 51,
+      "summary": "Clarified the product as a sales/use-tax economic-nexus early-warning/watchlist tool; replaced ambiguous user-facing withholding/compliance phrasing in core workflow labels; renamed the low-risk result to Below modeled economic-nexus threshold — based on imported data; added explicit non-all-clear language to UI, per-state notes, exports, manuals, and acceptance tests. Substantive jurisdiction rule rows and schema-v5 measurement logic were not changed.",
+      "reviewed_by": "Scope/UX remediation and regression QA; qualified tax reviewer approval still required for client reliance",
+      "source": "V1_3_1_CHANGELOG.md"
     }
   ]
 }
