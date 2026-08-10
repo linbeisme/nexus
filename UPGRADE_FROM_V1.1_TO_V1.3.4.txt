@@ -1,0 +1,9 @@
+Upgrade package from v1.1 to v1.3.4.
+
+Replace your prior app files with the contents of this package, including index.html, assets/, data/, scripts/, tests/, templates/, updates/, README.md, guide.html, and the v1.3.4 changelog.
+
+Key UI changes in v1.3.4:
+- Scope and Limitation Disclosure badge with flashing red siren, modal disclosure, and green viewed state.
+- Reset button relabeled to "Reset and Reload tax data".
+- Main title no longer includes "State Seller".
+- Warning sentence in the subtitle is bold red.

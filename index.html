@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="CPA research app for state remote-seller sales tax economic nexus collection, filing, and transaction threshold review.">
   <meta name="theme-color" id="themeColor" content="#f5f7fb">
-  <title>State Sales Tax Nexus Requirements v1.3.3</title>
+  <title>Sales Tax Collection &amp; Remittance Requirements v1.3.4</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <script>
     (() => {
@@ -22,9 +22,9 @@
 <main class="wrap">
   <header class="page-header">
     <div>
-      <div class="eyebrow">CPA RESEARCH WORKPAPER <span class="version-badge">v1.3.3</span></div>
-      <h1>State Seller Sales Tax Collection &amp; Remittance Requirements</h1>
-      <p class="subtitle">Economic-nexus <strong>early-warning and watchlist</strong> tool for remote sellers. It identifies states where imported sales activity is approaching, meeting, or may previously have met modeled sales/use-tax economic-nexus thresholds. It does not determine complete nexus or prescribe how to register, file, or remit.</p>
+      <div class="eyebrow">CPA RESEARCH WORKPAPER <span class="version-badge">v1.3.4</span></div>
+      <h1>Sales Tax Collection &amp; Remittance Requirements</h1>
+      <p class="subtitle">Economic-nexus <strong>early-warning and watchlist</strong> tool for remote sellers. It identifies states where imported sales activity is approaching, meeting, or may previously have met modeled sales/use-tax economic-nexus thresholds. <strong class="subtitle-warning">It does not determine complete nexus or prescribe how to register, file, or remit.</strong></p>
     </div>
     <div class="header-tools">
       <div class="stamp-line">
@@ -41,11 +41,11 @@
     </div>
   </header>
 
-  <section class="professional-note-bar" aria-label="Professional-use disclosure">
-    <button id="professionalUseToggle" class="professional-note-toggle" type="button" aria-haspopup="dialog" aria-controls="professionalUseDialog">
-      <span class="professional-note-icon" aria-hidden="true">i</span>
-      <span><strong>Professional-use note</strong><small>Scope, intended use, and important limitations</small></span>
-      <span class="professional-note-action">View disclosure</span>
+  <section class="professional-note-bar" aria-label="Scope and limitation disclosure">
+    <button id="professionalUseToggle" class="professional-note-toggle" type="button" aria-haspopup="dialog" aria-controls="professionalUseDialog" aria-expanded="false">
+      <span id="professionalDisclosureSiren" class="professional-note-siren professional-note-siren--unread" aria-hidden="true">🚨</span>
+      <span class="professional-note-copy"><strong>Scope and Limitation Disclosure</strong><small>Click to read the scope, limitation, and warning disclosures before using the app.</small></span>
+      <span id="professionalDisclosureStatus" class="professional-note-action">Read first</span>
     </button>
   </section>
 
@@ -85,7 +85,7 @@
         <button id="exportExcel" class="excel">Export filtered table to Excel</button>
         <button id="exportAllExcel" class="excel">Export all states to Excel</button>
         <button id="downloadDataset">Download updated JSON</button>
-        <button id="resetWorkingCopy" class="danger">Reset working copy</button>
+        <button id="resetWorkingCopy" class="danger">Reset and Reload tax data</button>
       </div>
       <div class="toolbar-row toolbar-status">
         <a class="button-link guide-link" href="./guide.html">Beginner setup &amp; update guide</a>
@@ -330,34 +330,31 @@
 <dialog id="professionalUseDialog" class="professional-use-dialog">
   <form method="dialog" class="modal professional-use-modal">
     <div class="modal-title-row">
-      <div><div class="eyebrow">PROFESSIONAL-USE DISCLOSURE</div><h2>Scope and limitations</h2></div>
-      <button value="cancel" class="modal-close" aria-label="Close professional-use disclosure">×</button>
+      <div><div class="eyebrow">DISCLOSURE</div><h2>Scope and Limitation Disclosure</h2></div>
+      <button value="cancel" class="modal-close" aria-label="Close scope and limitation disclosure">×</button>
     </div>
     <div class="professional-use-body">
-      <p class="professional-use-lede">This application is a conservative sales/use-tax economic-nexus early-warning and watchlist workpaper. It helps identify states that may require further review; it is not a complete tax-compliance determination.</p>
-      <div class="professional-use-grid">
-        <section>
-          <h3>What this app is designed to do</h3>
-          <ul>
-            <li>Monitor state economic-nexus dollar and transaction thresholds for remote sellers.</li>
-            <li>Identify states where imported sales activity is approaching, meeting, or may previously have met a modeled threshold.</li>
-            <li>Apply state-specific measurement periods and preserve historical threshold crossings when supported by the imported data.</li>
-            <li>Prioritize states for registration, collection, remittance, and related filing review.</li>
-            <li>Provide state rule references, effective/review dates, and primary-source links for professional follow-up.</li>
-          </ul>
-        </section>
-        <section>
-          <h3>What this app does not determine</h3>
-          <ul>
-            <li>It is not legal advice, a complete nexus/compliance determination, or a sales-tax return filing-frequency engine.</li>
-            <li>A result below the modeled threshold is <strong>not an “all clear.”</strong></li>
-            <li>It does not fully test physical presence, affiliate/click-through nexus, related entities, marketplace facts, product/service taxability, exemptions, home-rule/local taxes, trailing nexus, or special taxes.</li>
-            <li>It does not determine sales-tax rates, return filing frequency, due dates, registration procedures, or prepare/file returns.</li>
-            <li>Incomplete, misclassified, or otherwise inaccurate source data can affect the screening result.</li>
-          </ul>
-        </section>
-      </div>
-      <div class="professional-use-confirmation"><strong>Professional review required:</strong> Confirm every material registration, collection, remittance, or filing conclusion against current primary authority and the taxpayer's actual facts.</div>
+      <section class="professional-use-list-block">
+        <h3>Scope — what this app is designed to do</h3>
+        <ul>
+          <li>Provide a conservative sales/use-tax economic-nexus early-warning and watchlist workpaper for remote sellers.</li>
+          <li>Identify states where imported sales activity is approaching, meeting, or may previously have met modeled economic-nexus thresholds.</li>
+          <li>Apply state-specific measurement periods and help prioritize states for registration, collection, remittance, and related filing review.</li>
+          <li>Provide state rule references, effective dates, and primary-source links for professional follow-up.</li>
+        </ul>
+      </section>
+      <section class="professional-use-list-block">
+        <h3>Limitations and warning</h3>
+        <ul>
+          <li>This app is <strong>not</strong> legal advice, a complete nexus/compliance determination, or a sales-tax return filing-frequency engine.</li>
+          <li>A result below the modeled threshold is <strong>not an “all clear.”</strong></li>
+          <li>It does not fully determine physical presence, affiliate/click-through nexus, related-entity aggregation, marketplace facts, product/service taxability, exemption documentation, home-rule/local rules, trailing nexus, or special taxes.</li>
+          <li>It does not determine complete nexus or prescribe how to register, file, or remit.</li>
+          <li>It does not determine sales-tax rates, return filing frequency, due dates, or prepare/file returns.</li>
+          <li>Incomplete, missing, or misclassified source data can affect the screening result.</li>
+          <li>Confirm every material registration, collection, remittance, or filing conclusion against current primary authority and the taxpayer's actual facts.</li>
+        </ul>
+      </section>
     </div>
     <div class="modal-actions"><button value="cancel" class="primary">Close disclosure</button></div>
   </form>

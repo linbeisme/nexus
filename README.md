@@ -1,4 +1,4 @@
-# State Sales Tax Nexus Requirements App — v1.3.3
+# State Sales Tax Nexus Requirements App — v1.3.4
 
 Static GitHub Pages CPA research/workpaper application for remote-seller sales/use-tax economic-nexus screening across all 50 states plus the District of Columbia.
 
@@ -74,7 +74,7 @@ Do not auto-publish AI-generated tax conclusions. For material changes, confirm 
 - Research prompt strengthened so changes cascade across all dependent sections.
 
 
-## v1.3.3 highlights
-- Professional-use note is now an on-demand modal instead of an always-expanded banner.
+## v1.3.4 highlights
+- Scope and Limitation Disclosure is now an on-demand modal instead of an always-expanded banner.
 - Scope and limitations are presented in concise bullet points for faster review.
 - No substantive state-rule changes were made.
